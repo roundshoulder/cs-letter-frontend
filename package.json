@@ -23,7 +23,7 @@
     "eject": "react-scripts eject",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "http://da-in.github.io/portfolio",
+  "homepage": "https://roundshoulder.github.io/cs-letter-frontend/",
   "eslintConfig": {
     "extends": [
       "react-app",
