@@ -1,7 +1,5 @@
-import React, { LegacyRef, useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { css } from '@emotion/css';
-
-const check = '000000011111111110101000001100000001';
 
 const solution =
   "나는 새삥 모든 게 다 새삥 보세 옷을 걸쳐도 브랜드 묻는 DM이 와 I'm too sexy 헌 집 주고 새집 프리미엄이 붙어 두 배, 세 배, 네 배 yeah 나는 새삥";
