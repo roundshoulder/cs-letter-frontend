@@ -37,7 +37,7 @@ jobs:
 
       # Build
       - name: Build
-        run: yarn run build
+        run: yarn run build && cp build/index.html build/404.html
 
       # Deploy
       - name: Deploy
