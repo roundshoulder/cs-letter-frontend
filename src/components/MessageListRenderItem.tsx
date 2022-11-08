@@ -1,4 +1,5 @@
 import { css } from '@emotion/css';
+import { Link } from 'react-router-dom';
 import Tag from './Tag';
 
 const container = css`
@@ -13,14 +14,16 @@ const header = css`
 
 function MessageListRenderItem() {
   return (
-    <div className={container}>
-      <div className={header}>
-        <Tag color={4} text="채소피자" />
-        <div>미완성</div>
-        <div>1시간 전</div>
+    <Link to="/read/1">
+      <div className={container}>
+        <div className={header}>
+          <Tag color={4} text="채소피자" />
+          <div>미완성</div>
+          <div>1시간 전</div>
+        </div>
+        <span>ㄷㅎㅇ ㅇㄴ. ㅇㄴ ㄴㅇㄴㄷ ㅂ ㅅㅈㄷㄴㄲ</span>
       </div>
-      <span>ㄷㅎㅇ ㅇㄴ. ㅇㄴ ㄴㅇㄴㄷ ㅂ ㅅㅈㄷㄴㄲ</span>
-    </div>
+    </Link>
   );
 }
 

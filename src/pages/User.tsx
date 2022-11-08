@@ -4,6 +4,8 @@ import Theme from '../assets/Theme';
 import Button from '../components/Button';
 import MessageListRenderItem from '../components/MessageListRenderItem';
 import Tag from '../components/Tag';
+import { MdOutlineArrowBack, MdOutlineArrowForward } from 'react-icons/md';
+import { useState } from 'react';
 
 const profile = css`
   display: flex;
@@ -13,9 +15,35 @@ const profile = css`
   font-weight: ${Theme.fontWeight.semibold};
   margin-bottom: 30px;
 `;
+
 const nav = css`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   padding: 15px 0px 15px 0px;
   border-bottom: solid 1px #0a0a0a;
+`;
+
+const arrowButtonContainer = css`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 18px;
+  font-weight: ${Theme.fontWeight.bold};
+  gap: 13px;
+`;
+
+const arrowButton = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 35px;
+  font-size: 24px;
+  color: ${Theme.color.white};
+  background-color: ${Theme.color.black};
 `;
 
 const messages = [
@@ -40,6 +68,8 @@ const messages = [
 ];
 
 function User() {
+  const [page, setPage] = useState(1);
+  console.log(page);
   return (
     <>
       <div className={profile}>
@@ -48,6 +78,15 @@ function User() {
       </div>
       <div className={nav}>
         <Tag text="From." />
+        <div className={arrowButtonContainer}>
+          <button className={arrowButton} onClick={() => setPage(v => v - 1)}>
+            <MdOutlineArrowBack />
+          </button>
+          {page}
+          <button className={arrowButton} onClick={() => setPage(v => v + 1)}>
+            <MdOutlineArrowForward />
+          </button>
+        </div>
       </div>
       {messages.map(() => (
         <MessageListRenderItem />
@@ -58,11 +97,9 @@ function User() {
       <Link to="/create/1">
         <button>User 1에게 메세지 보내기</button>
       </Link>
-      <Link to="/read/1">
-        <button>메세지 확인하기</button>
-      </Link>
+
       <div>{`누르기만 해도 링크복사 :-)`}</div>
-      <Button>공유하고 초성편지받기</Button>
+      <Button isShare={true}>공유하고 초성편지받기</Button>
     </>
   );
 }
