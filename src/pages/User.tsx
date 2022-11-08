@@ -2,6 +2,7 @@ import { css } from '@emotion/css';
 import { Link } from 'react-router-dom';
 import Theme from '../assets/Theme';
 import Button from '../components/Button';
+import MessageListRenderItem from '../components/MessageListRenderItem';
 import Tag from '../components/Tag';
 
 const profile = css`
@@ -17,6 +18,27 @@ const nav = css`
   border-bottom: solid 1px #0a0a0a;
 `;
 
+const messages = [
+  {
+    name: '채소피자',
+    preview: 'ㄷㅎㅇ ㅇㄴ ㅇㄴ ㄴㅇㄴㄷ',
+    solved: false,
+    time: 1,
+  },
+  {
+    name: '채소피자',
+    preview: 'ㄷㅎㅇ ㅇㄴ ㅇㄴ ㄴㅇㄴㄷ',
+    solved: false,
+    time: 1,
+  },
+  {
+    name: '채소피자',
+    preview: 'ㄷㅎㅇ ㅇㄴ ㅇㄴ ㄴㅇㄴㄷ',
+    solved: false,
+    time: 1,
+  },
+];
+
 function User() {
   return (
     <>
@@ -27,6 +49,9 @@ function User() {
       <div className={nav}>
         <Tag text="From." />
       </div>
+      {messages.map(() => (
+        <MessageListRenderItem />
+      ))}
       <Link to="/cvf1tc0">
         <button>User 페이지</button>
       </Link>
@@ -36,6 +61,7 @@ function User() {
       <Link to="/read/1">
         <button>메세지 확인하기</button>
       </Link>
+      <div>{`누르기만 해도 링크복사 :-)`}</div>
       <Button>공유하고 초성편지받기</Button>
     </>
   );
