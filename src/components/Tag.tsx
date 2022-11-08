@@ -18,7 +18,7 @@ type Props = {
 };
 
 function Tag({ color = 10, text }: Props) {
-  return <div className={`${tag} ${Theme.color[color]}`}>{text}</div>;
+  return <div className={`${tag} ${Theme.tagStyle[color]}`}>{text}</div>;
 }
 
 export default Tag;

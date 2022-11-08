@@ -1,6 +1,6 @@
 import { css } from '@emotion/css';
 
-const color: { [key: number]: string } = {
+const tagStyle: { [key: number]: string } = {
   0: css`
     background-color: #ff8c8c;
     color: #6b2929;
@@ -46,6 +46,22 @@ const color: { [key: number]: string } = {
     color: #fafafa;
   `,
 };
+const color: { [key: string]: string } = {
+  red: '#ff8c8c',
+  orange: '#ffb864',
+  yellow: '#ffe665',
+  lightGreen: '#c6ff69',
+  green: '#4eda91',
+  lightBlue: '#abfff0',
+  blue: '#65c6ff',
+  lightPurple: '#e1b1ff',
+  pink: '#ff95ee',
+  purple: '#996aff',
+  black: '#0a0a0a',
+  grey: 'bcbcbc',
+  white: '#fafafa',
+};
+
 const fontWeight = {
   regular: 400,
   medium: 500,
@@ -53,7 +69,7 @@ const fontWeight = {
   bold: 700,
 };
 
-const Theme = { color, fontWeight };
+const Theme = { color, fontWeight, tagStyle };
 
 export const PADDING = 23;
 
