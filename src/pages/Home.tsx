@@ -1,5 +1,4 @@
 import { css } from '@emotion/css';
-import { KAKAO_AUTH_URL } from '../api/oauth';
 import KakaoButton from '../components/KakaoButton';
 
 const intro = css`

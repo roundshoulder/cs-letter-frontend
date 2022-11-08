@@ -15,10 +15,7 @@ function App() {
         <Route path="/:user" element={<User />} />
         <Route path="/create/:user" element={<Create />} />
         <Route path="/read/:no" element={<Read />} />
-        <Route
-          path="/oauth/callback/kakao"
-          element={<KakaoRedirectHandler />}
-        />
+        <Route path="/oauth" element={<KakaoRedirectHandler />} />
       </Routes>
     </MainContainer>
   );

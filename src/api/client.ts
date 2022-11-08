@@ -1,7 +1,8 @@
 import axios from 'axios';
 
-export const baseURL = 'https://roundshoulder.github.io/cs-letter-frontend';
-// export const baseURL = 'http://localhost:3000/cs-letter-frontend';
+export const siteURL = 'https://roundshoulder.github.io/cs-letter-frontend';
+// export const siteURL = 'http://localhost:3000/cs-letter-frontend';
+export const baseURL = 'http://3.35.186.95:8080';
 
 const client = axios.create({
   baseURL,
