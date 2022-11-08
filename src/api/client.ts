@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-export const baseURL =
-  'https://roundshoulder.github.io/cs-letter-frontend/ouath';
+export const baseURL = 'https://roundshoulder.github.io/cs-letter-frontend';
 // export const baseURL = 'http://localhost:3000/cs-letter-frontend';
 
 const client = axios.create({
