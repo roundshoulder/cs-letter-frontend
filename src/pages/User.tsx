@@ -3,9 +3,14 @@ import { Link } from 'react-router-dom';
 import Theme from '../assets/Theme';
 import MessageListRenderItem from '../components/MessageListRenderItem';
 import Tag from '../components/Tag';
-import { MdOutlineArrowBack, MdOutlineArrowForward } from 'react-icons/md';
+import {
+  MdOutlineArrowBack,
+  MdOutlineArrowForward,
+  MdOutlineCreate,
+} from 'react-icons/md';
 import { useState } from 'react';
 import BottomButton from '../components/BottomButton';
+import KakaoButton from '../components/KakaoButton';
 
 const profile = css`
   display: flex;
@@ -46,7 +51,60 @@ const arrowButton = css`
   background-color: ${Theme.color.black};
 `;
 
+const createButton = css`
+  position: fixed;
+  z-index: 100;
+  right: 23px;
+  bottom: 170px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  width: 70px;
+  height: 70px;
+  border-radius: 70px;
+  font-size: 40px;
+  color: ${Theme.color.white};
+  background-color: ${Theme.color.black};
+`;
+
 const messages = [
+  {
+    name: '채소피자',
+    preview: 'ㄷㅎㅇ ㅇㄴ ㅇㄴ ㄴㅇㄴㄷ',
+    solved: false,
+    time: 1,
+  },
+  {
+    name: '채소피자',
+    preview: 'ㄷㅎㅇ ㅇㄴ ㅇㄴ ㄴㅇㄴㄷ',
+    solved: false,
+    time: 1,
+  },
+  {
+    name: '채소피자',
+    preview: 'ㄷㅎㅇ ㅇㄴ ㅇㄴ ㄴㅇㄴㄷ',
+    solved: false,
+    time: 1,
+  },
+  {
+    name: '채소피자',
+    preview: 'ㄷㅎㅇ ㅇㄴ ㅇㄴ ㄴㅇㄴㄷ',
+    solved: false,
+    time: 1,
+  },
+  {
+    name: '채소피자',
+    preview: 'ㄷㅎㅇ ㅇㄴ ㅇㄴ ㄴㅇㄴㄷ',
+    solved: false,
+    time: 1,
+  },
+  {
+    name: '채소피자',
+    preview: 'ㄷㅎㅇ ㅇㄴ ㅇㄴ ㄴㅇㄴㄷ',
+    solved: false,
+    time: 1,
+  },
   {
     name: '채소피자',
     preview: 'ㄷㅎㅇ ㅇㄴ ㅇㄴ ㄴㅇㄴㄷ',
@@ -68,6 +126,7 @@ const messages = [
 ];
 
 function User() {
+  const [isOwner, setIsOwner] = useState(false);
   const [page, setPage] = useState(1);
   console.log(page);
   return (
@@ -97,9 +156,20 @@ function User() {
       <Link to="/create/1">
         <button>User 1에게 메세지 보내기</button>
       </Link>
-
-      <div>{`누르기만 해도 링크복사 :-)`}</div>
-      <BottomButton isShare={true}>공유하고 초성편지받기</BottomButton>
+      {isOwner ? (
+        <>
+          <div>{`누르기만 해도 링크복사 :-)`}</div>
+          <BottomButton isShare={true}>공유하고 초성편지받기</BottomButton>
+        </>
+      ) : (
+        <>
+          <div>초성편지 나도 받고 싶다면,</div>
+          <KakaoButton />
+          <button className={createButton}>
+            <MdOutlineCreate />
+          </button>
+        </>
+      )}
     </>
   );
 }

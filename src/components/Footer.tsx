@@ -8,14 +8,13 @@ function Footer() {
     width: 100%;
     height: 160px;
     padding: 30px;
+    font-size: 14px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     gap: 10px;
     background-color: ${isHome ? '#0a0a0a' : '#f8f8f8'};
     color: ${isHome ? '#fafafa' : '#757575'};
-    position: absolute;
-    bottom: 0;
   `;
 
   return (
