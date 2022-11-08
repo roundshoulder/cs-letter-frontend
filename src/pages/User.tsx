@@ -1,6 +1,7 @@
 import { css } from '@emotion/css';
 import { Link } from 'react-router-dom';
 import Theme from '../assets/Theme';
+import Button from '../components/Button';
 import Tag from '../components/Tag';
 
 const profile = css`
@@ -35,6 +36,7 @@ function User() {
       <Link to="/read/1">
         <button>메세지 확인하기</button>
       </Link>
+      <Button>공유하고 초성편지받기</Button>
     </>
   );
 }
