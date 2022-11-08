@@ -9,7 +9,7 @@ type Props = {
   children: ReactNode;
 };
 
-function Button({ enable = true, isShare = false, children }: Props) {
+function BottomButton({ enable = true, isShare = false, children }: Props) {
   const button = css`
     gap: 16px;
     width: 100%;
@@ -32,4 +32,4 @@ function Button({ enable = true, isShare = false, children }: Props) {
   );
 }
 
-export default Button;
+export default BottomButton;

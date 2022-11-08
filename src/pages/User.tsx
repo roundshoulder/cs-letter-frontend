@@ -1,11 +1,11 @@
 import { css } from '@emotion/css';
 import { Link } from 'react-router-dom';
 import Theme from '../assets/Theme';
-import Button from '../components/Button';
 import MessageListRenderItem from '../components/MessageListRenderItem';
 import Tag from '../components/Tag';
 import { MdOutlineArrowBack, MdOutlineArrowForward } from 'react-icons/md';
 import { useState } from 'react';
+import BottomButton from '../components/BottomButton';
 
 const profile = css`
   display: flex;
@@ -99,7 +99,7 @@ function User() {
       </Link>
 
       <div>{`누르기만 해도 링크복사 :-)`}</div>
-      <Button isShare={true}>공유하고 초성편지받기</Button>
+      <BottomButton isShare={true}>공유하고 초성편지받기</BottomButton>
     </>
   );
 }
