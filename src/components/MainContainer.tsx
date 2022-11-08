@@ -7,11 +7,12 @@ import Footer from './Footer';
 
 const mainContainer = css`
   width: 100%;
+  min-height: 100%;
   @media screen and (min-width: 768px) {
     width: 480px;
   }
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
 `;
 
@@ -22,14 +23,12 @@ const padding = css`
 function MainContainer({ children }: { children: ReactNode }) {
   const path = useLocation().pathname;
   return (
-    <div className={mainContainer}>
-      <Header />
-      <div
-        className={padding}
-        style={path !== '/' ? { backgroundColor: '#FAFAFA' } : undefined}
-      >
-        {children}
-      </div>
+    <div
+      className={mainContainer}
+      style={path === '/' ? { backgroundColor: '#0a0a0a' } : undefined}
+    >
+      {path === '/' ? <></> : <Header />}
+      <div className={padding}>{children}</div>
       <Footer />
     </div>
   );
