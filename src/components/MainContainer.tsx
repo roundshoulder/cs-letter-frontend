@@ -3,6 +3,7 @@ import { css } from '@emotion/css';
 import Header from './Header';
 import { useLocation } from 'react-router-dom';
 import { PADDING } from '../assets/Theme';
+import Footer from './Footer';
 
 const mainContainer = css`
   width: 100%;
@@ -29,6 +30,7 @@ function MainContainer({ children }: { children: ReactNode }) {
       >
         {children}
       </div>
+      <Footer />
     </div>
   );
 }
