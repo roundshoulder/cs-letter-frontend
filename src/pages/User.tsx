@@ -153,9 +153,13 @@ function User() {
       <Link to="/cvf1tc0">
         <button>User 페이지</button>
       </Link>
-      <Link to="/create/1">
-        <button>User 1에게 메세지 보내기</button>
-      </Link>
+      <button
+        onClick={() => {
+          setIsOwner(v => !v);
+        }}
+      >
+        본인/타인 전환
+      </button>
       {isOwner ? (
         <>
           <div>{`누르기만 해도 링크복사 :-)`}</div>
@@ -165,9 +169,9 @@ function User() {
         <>
           <div>초성편지 나도 받고 싶다면,</div>
           <KakaoButton />
-          <button className={createButton}>
+          <Link to="/create/1" className={createButton}>
             <MdOutlineCreate />
-          </button>
+          </Link>
         </>
       )}
     </>
