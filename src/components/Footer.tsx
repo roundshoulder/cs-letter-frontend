@@ -6,6 +6,7 @@ const footer = css`
   width: 100%;
   height: 160px;
   padding: 30px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 10px;
