@@ -1,7 +1,7 @@
 {
   "name": "cs-letter-frontend",
   "version": "0.1.0",
-  "homepage": "https://roundshoulder.github.io/cs-letter-frontend",
+  "homepage": "https://chosung-letter.com",
   "private": true,
   "dependencies": {
     "@emotion/css": "^11.10.5",
