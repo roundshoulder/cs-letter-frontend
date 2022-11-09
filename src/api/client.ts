@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export const siteURL = 'chosung-letter.com';
-// export const siteURL = 'http://localhost:3000/cs-letter-frontend';
+export const siteURL = 'https://chosung-letter.com';
+// export const siteURL = 'http://localhost:3000';
 export const baseURL = 'http://3.35.186.95:8080';
 
 const client = axios.create({
