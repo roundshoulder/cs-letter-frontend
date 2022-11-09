@@ -1,4 +1,3 @@
-import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import MainContainer from './components/MainContainer';
 import KakaoRedirectHandler from './pages/KakaoRedirectHandler';
@@ -15,7 +14,7 @@ function App() {
         <Route path="/:user" element={<User />} />
         <Route path="/create/:user" element={<Create />} />
         <Route path="/read/:no" element={<Read />} />
-        <Route path="/oauth" element={<KakaoRedirectHandler />} />
+        <Route path="/oauth/callback/*" element={<KakaoRedirectHandler />} />
       </Routes>
     </MainContainer>
   );
