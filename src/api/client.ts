@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const siteURL = 'https://roundshoulder.github.io/cs-letter-frontend';
+export const siteURL = 'chosung-letter.com';
 // export const siteURL = 'http://localhost:3000/cs-letter-frontend';
 export const baseURL = 'http://3.35.186.95:8080';
 
