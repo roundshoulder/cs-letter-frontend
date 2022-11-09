@@ -7,6 +7,8 @@ function KakaoRedirectHandler() {
   const navigate = useNavigate();
   const authorizationCode = location.search.split('=')[1];
 
+  console.log('mount');
+
   useQuery('login', () => login(authorizationCode), {
     onSuccess: data => {
       console.log(data);
