@@ -1,5 +1,13 @@
+import { type } from 'os';
+
 export interface User {
   username: string;
+}
+
+export interface AuthResult {
+  memberToken: string;
+  accessToken: string;
+  refreshToken: string;
 }
 
 // export interface GetUserResult extends User {
