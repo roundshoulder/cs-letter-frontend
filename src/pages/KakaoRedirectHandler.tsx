@@ -1,7 +1,21 @@
-import React, { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { login } from '../api/auth';
+import { useQuery } from 'react-query';
 
 function KakaoRedirectHandler() {
-  useEffect(() => {}, []);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const authorizationCode = location.search.split('=')[1];
+
+  console.log('mount');
+
+  useQuery('login', () => login(authorizationCode), {
+    onSuccess: data => {
+      console.log(data);
+      navigate('/user');
+    },
+  });
+
   return <></>;
 }
 

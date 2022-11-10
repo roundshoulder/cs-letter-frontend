@@ -1,13 +1,17 @@
-import React from 'react';
-import { KAKAO_AUTH_URL } from '../api/oauth';
+import { css } from '@emotion/css';
+import KakaoButton from '../components/KakaoButton';
+
+const intro = css`
+  color: #fafafa;
+  padding: 26px;
+`;
 
 function Home() {
   return (
-    <div>
-      <a href={KAKAO_AUTH_URL}>
-        <button>카카오 로그인</button>
-      </a>
-    </div>
+    <>
+      <div className={intro}>초성편지를 보내보세요!</div>
+      <KakaoButton />
+    </>
   );
 }
 

@@ -23,4 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # Base URL
-/src/api/client.ts
+/src/api/oauth.ts
