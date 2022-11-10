@@ -34,7 +34,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: decrypt file
-        run: gpg --quiet --batch --yes --decrypt --passphrase="$PASS_PHRASE" --output $HOME/src/api/oauth.ts src/api/oauth.ts.gpg
+        run: gpg --quiet --batch --yes --decrypt --passphrase="$PASS_PHRASE" --output src/api/oauth.ts src/api/oauth.ts.gpg
         env:
           PASS_PHRASE: ${{ secrets.PASS_PHRASE }}
 
