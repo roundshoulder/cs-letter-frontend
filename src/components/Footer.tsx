@@ -1,7 +1,5 @@
 import { css } from '@emotion/css';
 import { useLocation } from 'react-router-dom';
-import Theme from '../assets/Theme';
-import logo from '../assets/logo.svg';
 
 function Footer() {
   const isHome = useLocation().pathname === '/';
