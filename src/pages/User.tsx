@@ -1,5 +1,5 @@
 import { css } from '@emotion/css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Theme from '../assets/Theme';
 import MessageListRenderItem from '../components/MessageListRenderItem';
 import Tag from '../components/Tag';
@@ -11,6 +11,9 @@ import {
 import { useState } from 'react';
 import BottomButton from '../components/BottomButton';
 import KakaoButton from '../components/KakaoButton';
+import { useQuery } from 'react-query';
+import { getUser } from '../api/user';
+import { getUserResult } from '../api/user/type';
 
 const profile = css`
   display: flex;
@@ -66,6 +69,13 @@ const createButton = css`
   font-size: 40px;
   color: ${Theme.color.white};
   background-color: ${Theme.color.black};
+`;
+
+const profileImg = css`
+  width: 35px;
+  height: 35px;
+  border-radius: 35px;
+  border: solid 2px ${Theme.color.black};
 `;
 
 const messages = [
@@ -126,15 +136,28 @@ const messages = [
 ];
 
 function User() {
-  const [isOwner, setIsOwner] = useState(false);
+  const memberToken = useLocation().pathname.split('/')[2];
+  const [user, setUser] = useState<getUserResult | null>(null);
   const [page, setPage] = useState(1);
-  console.log(page);
+
+  useQuery('getUser', () => getUser(memberToken), {
+    onSuccess: (data: getUserResult) => {
+      setUser(data);
+    },
+  });
   return (
     <>
-      <div className={profile}>
-        <Tag text="To." />
-        최도원
-      </div>
+      {user && (
+        <div className={profile}>
+          <Tag text="To." />
+          <img
+            src={user.kakaoProfileImg}
+            className={profileImg}
+            alt="profile"
+          />
+          {user.kakaoNickname}
+        </div>
+      )}
       <div className={nav}>
         <Tag text="From." />
         <div className={arrowButtonContainer}>
@@ -153,14 +176,7 @@ function User() {
       <Link to="/cvf1tc0">
         <button>User 페이지</button>
       </Link>
-      <button
-        onClick={() => {
-          setIsOwner(v => !v);
-        }}
-      >
-        본인/타인 전환
-      </button>
-      {isOwner ? (
+      {/* {isOwner ? (
         <>
           <div>{`누르기만 해도 링크복사 :-)`}</div>
           <BottomButton isShare={true}>공유하고 초성편지받기</BottomButton>
@@ -173,7 +189,7 @@ function User() {
             <MdOutlineCreate />
           </Link>
         </>
-      )}
+      )} */}
     </>
   );
 }
