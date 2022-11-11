@@ -14,8 +14,10 @@ import KakaoButton from '../components/KakaoButton';
 import { useQuery } from 'react-query';
 import { getUser } from '../api/user';
 import { getUserResult } from '../api/user/type';
+import { getMessage } from '../api/message';
 
 const profile = css`
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -55,20 +57,17 @@ const arrowButton = css`
 `;
 
 const createButton = css`
-  position: fixed;
-  z-index: 100;
-  right: 23px;
-  bottom: 170px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: none;
-  width: 70px;
-  height: 70px;
-  border-radius: 70px;
-  font-size: 40px;
-  color: ${Theme.color.white};
-  background-color: ${Theme.color.black};
+  gap: 5px;
+  width: fit-content;
+  padding: 0px 10px 0px 10px;
+  height: 35px;
+  border-radius: 35px;
+  font-weight: ${Theme.fontWeight.medium};
+  position: absolute;
+  right: 0;
 `;
 
 const profileImg = css`
@@ -85,111 +84,83 @@ const messages = [
     solved: false,
     time: 1,
   },
-  {
-    name: '채소피자',
-    preview: 'ㄷㅎㅇ ㅇㄴ ㅇㄴ ㄴㅇㄴㄷ',
-    solved: false,
-    time: 1,
-  },
-  {
-    name: '채소피자',
-    preview: 'ㄷㅎㅇ ㅇㄴ ㅇㄴ ㄴㅇㄴㄷ',
-    solved: false,
-    time: 1,
-  },
-  {
-    name: '채소피자',
-    preview: 'ㄷㅎㅇ ㅇㄴ ㅇㄴ ㄴㅇㄴㄷ',
-    solved: false,
-    time: 1,
-  },
-  {
-    name: '채소피자',
-    preview: 'ㄷㅎㅇ ㅇㄴ ㅇㄴ ㄴㅇㄴㄷ',
-    solved: false,
-    time: 1,
-  },
-  {
-    name: '채소피자',
-    preview: 'ㄷㅎㅇ ㅇㄴ ㅇㄴ ㄴㅇㄴㄷ',
-    solved: false,
-    time: 1,
-  },
-  {
-    name: '채소피자',
-    preview: 'ㄷㅎㅇ ㅇㄴ ㅇㄴ ㄴㅇㄴㄷ',
-    solved: false,
-    time: 1,
-  },
-  {
-    name: '채소피자',
-    preview: 'ㄷㅎㅇ ㅇㄴ ㅇㄴ ㄴㅇㄴㄷ',
-    solved: false,
-    time: 1,
-  },
-  {
-    name: '채소피자',
-    preview: 'ㄷㅎㅇ ㅇㄴ ㅇㄴ ㄴㅇㄴㄷ',
-    solved: false,
-    time: 1,
-  },
 ];
 
 function User() {
   const memberToken = useLocation().pathname.split('/')[2];
   const [user, setUser] = useState<getUserResult | null>(null);
-  const [page, setPage] = useState(1);
+  const [cursor, setCursor] = useState<number>(0);
+  // const [messages, setMessages] = useState();
 
   useQuery('getUser', () => getUser(memberToken), {
     onSuccess: (data: getUserResult) => {
       setUser(data);
     },
   });
+
+  useQuery('getMessage', () => getMessage({ memberToken, cursor }), {
+    onSuccess: data => {
+      console.log(data);
+    },
+  });
   return (
     <>
       {user && (
-        <div className={profile}>
-          <Tag text="To." />
-          <img
-            src={user.kakaoProfileImg}
-            className={profileImg}
-            alt="profile"
-          />
-          {user.kakaoNickname}
-        </div>
+        <>
+          <div className={profile}>
+            <Tag text="To." />
+            <img
+              src={user.kakaoProfileImg}
+              className={profileImg}
+              alt="profile"
+            />
+            {user.kakaoNickname}
+            {!user.isMe && (
+              <Link
+                to={`/create/${memberToken}`}
+                className={`${createButton} ${Theme.tagStyle[11]}`}
+              >
+                <MdOutlineCreate />
+                편지쓰기
+              </Link>
+            )}
+          </div>
+          <div className={nav}>
+            <Tag text="From." />
+            <div className={arrowButtonContainer}>
+              <button
+                className={arrowButton}
+                onClick={() => setCursor(v => v - 1)}
+              >
+                <MdOutlineArrowBack />
+              </button>
+              {cursor + 1}
+              <button
+                className={arrowButton}
+                onClick={() => setCursor(v => v + 1)}
+              >
+                <MdOutlineArrowForward />
+              </button>
+            </div>
+          </div>
+          {messages.map(() => (
+            <MessageListRenderItem />
+          ))}
+          {user.isMe ? (
+            <>
+              <div>{`누르기만 해도 링크복사 :-)`}</div>
+              <BottomButton isShare={true}>공유하고 초성편지받기</BottomButton>
+            </>
+          ) : (
+            !localStorage.getItem('refreshToken') && (
+              <>
+                <div>초성편지 나도 받고 싶다면,</div>
+                <KakaoButton />
+              </>
+            )
+          )}
+        </>
       )}
-      <div className={nav}>
-        <Tag text="From." />
-        <div className={arrowButtonContainer}>
-          <button className={arrowButton} onClick={() => setPage(v => v - 1)}>
-            <MdOutlineArrowBack />
-          </button>
-          {page}
-          <button className={arrowButton} onClick={() => setPage(v => v + 1)}>
-            <MdOutlineArrowForward />
-          </button>
-        </div>
-      </div>
-      {messages.map(() => (
-        <MessageListRenderItem />
-      ))}
-      <Link to="/cvf1tc0">
-        <button>User 페이지</button>
-      </Link>
-      {/* {isOwner ? (
-        <>
-          <div>{`누르기만 해도 링크복사 :-)`}</div>
-          <BottomButton isShare={true}>공유하고 초성편지받기</BottomButton>
-        </>
-      ) : (
-        <>
-          <div>초성편지 나도 받고 싶다면,</div>
-          <KakaoButton />
-          <Link to="/create/1" className={createButton}>
-            <MdOutlineCreate />
-          </Link>
-        </>
-      )} */}
     </>
   );
 }
