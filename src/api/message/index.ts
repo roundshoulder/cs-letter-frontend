@@ -1,10 +1,14 @@
 import client from '../client';
-import { getMessageParams } from './types';
+import { createMessageParams, getMessageParams } from './types';
 
-// 로그인
 export async function getMessage({ memberToken, cursor }: getMessageParams) {
   const response = await client.get(
     `/messages/${memberToken}?cursor=${cursor}`
   );
+  return response;
+}
+
+export async function createMessage(params: createMessageParams) {
+  const response = await client.post(`/messages`, params);
   return response;
 }

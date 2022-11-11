@@ -3,6 +3,9 @@ export interface getMessageParams {
   cursor: number;
 }
 
-export interface Message {
-  username: string;
+export interface createMessageParams {
+  body: string;
+  nickname: string;
+  toMemberToken: string;
+  color: number;
 }

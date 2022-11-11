@@ -7,9 +7,15 @@ type Props = {
   enable?: boolean;
   isShare?: boolean;
   children: ReactNode;
+  onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
-function BottomButton({ enable = true, isShare = false, children }: Props) {
+function BottomButton({
+  enable = true,
+  isShare = false,
+  children,
+  onClick,
+}: Props) {
   const button = css`
     gap: 16px;
     width: 100%;
@@ -25,7 +31,7 @@ function BottomButton({ enable = true, isShare = false, children }: Props) {
   `;
 
   return (
-    <button className={button}>
+    <button className={button} onClick={onClick}>
       {isShare && <MdShare size={22} />}
       {children}
     </button>
