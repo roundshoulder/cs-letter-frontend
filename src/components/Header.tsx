@@ -64,7 +64,7 @@ function Header() {
             )}
             <button
               onClick={() =>
-                navigate(`/${localStorage.getItem('memberToken')}`)
+                navigate(`/u/${localStorage.getItem('memberToken')}`)
               }
               className={iconButton}
             >
