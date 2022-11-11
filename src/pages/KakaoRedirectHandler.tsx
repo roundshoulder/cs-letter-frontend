@@ -12,10 +12,11 @@ function KakaoRedirectHandler() {
   useQuery('login', () => login(authorizationCode), {
     onSuccess: (data: AuthResult) => {
       const { memberToken, accessToken, refreshToken } = data;
+      localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
       localStorage.setItem('memberToken', memberToken);
       applyToken(accessToken);
-      navigate(`/${memberToken}`);
+      navigate(`/u/${memberToken}`);
     },
   });
 

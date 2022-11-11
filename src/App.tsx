@@ -14,7 +14,7 @@ function App() {
       <MainContainer>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/:user" element={<User />} />
+          <Route path="/u/:user" element={<User />} />
           <Route path="/create/:user" element={<Create />} />
           <Route path="/read/:no" element={<Read />} />
           <Route path="/oauth/callback/*" element={<KakaoRedirectHandler />} />
