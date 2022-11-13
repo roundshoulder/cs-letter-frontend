@@ -3,11 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import Theme from '../assets/Theme';
 import MessageListRenderItem from '../components/MessageListRenderItem';
 import Tag from '../components/Tag';
-import {
-  MdOutlineArrowBack,
-  MdOutlineArrowForward,
-  MdOutlineCreate,
-} from 'react-icons/md';
+import { MdOutlineCreate } from 'react-icons/md';
 import { useState } from 'react';
 import BottomButton from '../components/BottomButton';
 import KakaoButton from '../components/KakaoButton';
@@ -15,6 +11,8 @@ import { useQuery } from 'react-query';
 import { getUser } from '../api/user';
 import { getUserResult } from '../api/user/type';
 import { getMessage } from '../api/message';
+import { Message } from '../api/message/types';
+import PageNavButton from '../components/PageNavButton';
 
 const profile = css`
   position: relative;
@@ -43,19 +41,6 @@ const arrowButtonContainer = css`
   gap: 13px;
 `;
 
-const arrowButton = css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  width: 35px;
-  height: 35px;
-  border-radius: 35px;
-  font-size: 24px;
-  color: ${Theme.color.white};
-  background-color: ${Theme.color.black};
-`;
-
 const createButton = css`
   display: flex;
   justify-content: center;
@@ -77,20 +62,11 @@ const profileImg = css`
   border: solid 2px ${Theme.color.black};
 `;
 
-const messages = [
-  {
-    name: '채소피자',
-    preview: 'ㄷㅎㅇ ㅇㄴ ㅇㄴ ㄴㅇㄴㄷ',
-    solved: false,
-    time: 1,
-  },
-];
-
 function User() {
   const memberToken = useLocation().pathname.split('/')[2];
   const [user, setUser] = useState<getUserResult | null>(null);
   const [cursor, setCursor] = useState<number>(0);
-  // const [messages, setMessages] = useState();
+  const [messages, setMessages] = useState<Message[] | null>(null);
 
   useQuery('getUser', () => getUser(memberToken), {
     onSuccess: (data: getUserResult) => {
@@ -100,12 +76,12 @@ function User() {
 
   useQuery('getMessage', () => getMessage({ memberToken, cursor }), {
     onSuccess: data => {
-      console.log(data);
+      setMessages(data);
     },
   });
   return (
     <>
-      {user && (
+      {user && messages && (
         <>
           <div className={profile}>
             <Tag text="To." />
@@ -128,23 +104,21 @@ function User() {
           <div className={nav}>
             <Tag text="From." />
             <div className={arrowButtonContainer}>
-              <button
-                className={arrowButton}
+              <PageNavButton
                 onClick={() => setCursor(v => v - 1)}
-              >
-                <MdOutlineArrowBack />
-              </button>
+                direction="back"
+                enable={cursor !== 0}
+              />
               {cursor + 1}
-              <button
-                className={arrowButton}
+              <PageNavButton
                 onClick={() => setCursor(v => v + 1)}
-              >
-                <MdOutlineArrowForward />
-              </button>
+                direction="foward"
+                enable={messages[messages.length - 1].haveNextMessage}
+              />
             </div>
           </div>
-          {messages.map(() => (
-            <MessageListRenderItem />
+          {messages.map(message => (
+            <MessageListRenderItem message={message} isMe={user.isMe} />
           ))}
           {user.isMe ? (
             <>

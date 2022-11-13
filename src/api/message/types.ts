@@ -9,3 +9,10 @@ export interface createMessageParams {
   toMemberToken: string;
   color: number;
 }
+
+export interface Message extends createMessageParams {
+  messageId: number;
+  haveNextMessage: boolean;
+  time: string;
+  isCorrect: boolean;
+}
