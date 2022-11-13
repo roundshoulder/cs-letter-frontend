@@ -36,12 +36,27 @@ code {
     monospace;
 }
 
+input {
+  padding: 0px 0px 10px 0px;
+  font-size: 14px;
+}:focus{
+  outline: none; 
+}::placeholder{
+  color: #bcbcbc;
+}
+
 textarea {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding: 10px;
+  font-size: 14px;
+}:focus{
+  outline: none;
+}::placeholder{
+  color: #bcbcbc
 }
 
 button {

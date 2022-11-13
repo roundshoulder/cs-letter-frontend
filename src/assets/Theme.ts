@@ -63,7 +63,7 @@ const color: { [key: string]: string } = {
   pink: '#ff95ee',
   purple: '#996aff',
   black: '#0a0a0a',
-  grey: 'bcbcbc',
+  grey: '#bcbcbc',
   white: '#fafafa',
 };
 

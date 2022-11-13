@@ -9,6 +9,6 @@ export async function getMessage({ memberToken, cursor }: getMessageParams) {
 }
 
 export async function createMessage(params: createMessageParams) {
-  const response = await client.post(`/messages`, params);
+  const response = await client.post(`/message`, params);
   return response;
 }

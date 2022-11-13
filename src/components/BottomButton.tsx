@@ -26,8 +26,8 @@ function BottomButton({
     align-items: center;
     justify-content: center;
     font-weight: ${Theme.fontWeight.semibold};
-    color: ${enable ? Theme.color.white : Theme.color.black};
-    background-color: ${enable ? Theme.color.black : Theme.color.white};
+    color: ${Theme.color.white};
+    background-color: ${enable ? Theme.color.black : Theme.color.grey};
   `;
 
   return (
