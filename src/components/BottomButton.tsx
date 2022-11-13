@@ -4,16 +4,16 @@ import Theme from '../assets/Theme';
 import { MdShare } from 'react-icons/md';
 
 type Props = {
+  children: ReactNode;
   enable?: boolean;
   isShare?: boolean;
-  children: ReactNode;
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
 function BottomButton({
+  children,
   enable = true,
   isShare = false,
-  children,
   onClick,
 }: Props) {
   const button = css`

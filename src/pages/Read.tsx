@@ -4,37 +4,35 @@ import { useQuery } from 'react-query';
 import { getDetailMessage } from '../api/message';
 import { useLocation } from 'react-router-dom';
 import { DetailMessage } from '../api/message/types';
+import Tag from '../components/Tag';
+import Theme from '../assets/Theme';
+import BottomButton from '../components/BottomButton';
 
 const solution =
   "나는 새삥 모든 게 다 새삥 보세 옷을 걸쳐도 브랜드 묻는 DM이 와 I'm too sexy 헌 집 주고 새집 프리미엄이 붙어 두 배, 세 배, 네 배 yeah 나는 새삥";
 const problem =
   "ㄴㄴ ㅅㅃ ㅁㄷ ㄱ ㄷ ㅅㅃ ㅂㅅ ㅇㅇ ㄱㅊㄷ ㅂㄹㄷ ㅁㄴ DMㅇ ㅇ I'm too sexy ㅎ ㅈ ㅈㄱ ㅅㅈ ㅍㄹㅁㅇㅇ ㅂㅇ ㄷ ㅂ, ㅅ ㅂ, ㄴ ㅂ yeah ㄴㄴ ㅅㅃ";
 
-const textStyle = css`
-  line-height: 60px;
+const textArea = css`
+  background: none;
   font-size: 16px;
-  font-weight: bold;
 `;
 
-const inputStyle = css`
-  border: none;
-  padding: 0px;
+const problemStyle = css`
+  /* line-height: 60px;
+  font-size: 16px;
+  font-weight: bold; */
+`;
+
+const solutionStyle = css`
+  /* border: solid 1.5px ${Theme.color.grey};
+  border-radius: 15px;
   background: none;
   :focus {
     outline: none;
   }
   display: block;
-  position: absolute;
-  top: 22px;
-  width: 100%;
-  color: #656565;
-  font-weight: normal;
-`;
-
-const buttonStyle = css`
-  margin-top: 200px;
-  width: 100%;
-  height: 40px;
+  position: absolute; */
 `;
 
 const red = css`
@@ -72,12 +70,18 @@ function Read() {
   }
 
   return (
-    <div>
+    <>
+      <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
+        <Tag text="From." />
+        <Tag text="채소피자" color={0} />
+      </div>
       {isEditable ? (
         <>
-          <div className={textStyle}>{problem}</div>
+          <textarea className={`${textArea} ${problemStyle}`} disabled={true}>
+            {problem}
+          </textarea>
           <textarea
-            className={`${textStyle} ${inputStyle}`}
+            className={`${textArea} ${solutionStyle}`}
             spellCheck={false}
             maxLength={problem.length}
             value={answer}
@@ -89,7 +93,7 @@ function Read() {
         <button onClick={() => setIsEditable(true)} className={viewMode}>
           <div
             style={{ display: 'flex', flexWrap: 'wrap' }}
-            className={textStyle}
+            className={`${textArea} ${problemStyle}`}
           >
             {result.map((v, i) =>
               problem[i] === ' ' ? (
@@ -108,7 +112,7 @@ function Read() {
               position: 'absolute',
               top: '22px',
             }}
-            className={`${textStyle} ${inputStyle}`}
+            className={`${textArea} ${solutionStyle}`}
           >
             {result.map((v, i) =>
               answer[i] === ' ' ? (
@@ -122,14 +126,10 @@ function Read() {
           </div>
         </button>
       )}
-      <button
-        className={buttonStyle}
-        onClick={checkAnswer}
-        disabled={answer.length !== problem.length}
-      >
+      <BottomButton enable={!!answer.length} onClick={() => {}}>
         확인하기
-      </button>
-    </div>
+      </BottomButton>
+    </>
   );
 }
 

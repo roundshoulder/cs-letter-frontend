@@ -5,13 +5,15 @@ import { useLocation } from 'react-router-dom';
 import { PADDING } from '../assets/Theme';
 import Footer from './Footer';
 
-const contentsContainer = css`
-  padding: ${PADDING}px;
-  flex-grow: 1;
-`;
-
 function MainContainer({ children }: { children: ReactNode }) {
   const isHome = useLocation().pathname === '/';
+  const contentsContainer = css`
+    display: flex;
+    flex-direction: column;
+    justify-content: ${isHome ? 'center' : undefined};
+    padding: ${isHome ? 0 : PADDING}px;
+    flex-grow: 1;
+  `;
   const mainContainer = css`
     width: 100%;
     min-height: 100%;

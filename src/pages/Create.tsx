@@ -90,6 +90,7 @@ function Create() {
           onChange={e => {
             setForm({ ...form, nickname: e.target.value });
           }}
+          maxLength={10}
         />
       </div>
       <div className={row}>
