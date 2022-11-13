@@ -16,3 +16,10 @@ export interface Message extends createMessageParams {
   time: string;
   isCorrect: boolean;
 }
+
+export interface DetailMessage extends createMessageParams {}
+
+export interface markingParams {
+  body: string;
+  messageId: number;
+}

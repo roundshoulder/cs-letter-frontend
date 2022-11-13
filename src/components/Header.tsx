@@ -8,6 +8,7 @@ import {
 import Theme, { PADDING } from '../assets/Theme';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { clearToken } from '../api/client';
+import { KAKAO_AUTH_URL } from '../api/oauth';
 
 const headerContainer = css`
   height: 60px;
@@ -16,6 +17,7 @@ const headerContainer = css`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 10;
 `;
 
 const iconContainer = css`
@@ -57,19 +59,25 @@ function Header() {
       <div className={iconContainer} style={{ justifyContent: 'flex-end' }}>
         {isUserPage && (
           <>
-            {isLoginUser && (
-              <button onClick={() => Logout()} className={iconButton}>
-                <MdLogout size={20} />
-              </button>
+            {isLoginUser ? (
+              <>
+                <button onClick={() => Logout()} className={iconButton}>
+                  <MdLogout size={20} />
+                </button>
+                <button
+                  onClick={() =>
+                    navigate(`/u/${localStorage.getItem('memberToken')}`)
+                  }
+                  className={iconButton}
+                >
+                  <MdPermIdentity size={20} />
+                </button>
+              </>
+            ) : (
+              <a href={KAKAO_AUTH_URL} style={{ padding: '1px 6px' }}>
+                <MdPermIdentity size={20} color={Theme.color.white} />
+              </a>
             )}
-            <button
-              onClick={() =>
-                navigate(`/u/${localStorage.getItem('memberToken')}`)
-              }
-              className={iconButton}
-            >
-              <MdPermIdentity size={20} />
-            </button>
           </>
         )}
       </div>

@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { css } from '@emotion/css';
+import { useQuery } from 'react-query';
+import { getDetailMessage } from '../api/message';
+import { useLocation } from 'react-router-dom';
+import { DetailMessage } from '../api/message/types';
 
 const solution =
   "나는 새삥 모든 게 다 새삥 보세 옷을 걸쳐도 브랜드 묻는 DM이 와 I'm too sexy 헌 집 주고 새집 프리미엄이 붙어 두 배, 세 배, 네 배 yeah 나는 새삥";
@@ -43,9 +47,15 @@ const viewMode = css`
 `;
 
 function Read() {
+  const messageId = useLocation().pathname.split('/')[2];
+  console.log(messageId);
   const [answer, setAnswer] = useState('');
   const [result, setResult] = useState([0]);
   const [isEditable, setIsEditable] = useState(true);
+
+  useQuery('getDetailMessage', () => getDetailMessage(messageId), {
+    onSuccess: (data: DetailMessage) => {},
+  });
 
   function checkAnswer() {
     console.log(result);

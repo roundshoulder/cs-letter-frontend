@@ -31,6 +31,7 @@ interface Params {
 }
 
 function MessageListRenderItem({ message, isMe }: Params) {
+  console.log(isMe);
   const { body, color, messageId, nickname, time, isCorrect } = message;
   function Container({ children }: { children: ReactNode }) {
     return isMe ? (
@@ -58,7 +59,7 @@ function MessageListRenderItem({ message, isMe }: Params) {
               className={status}
               style={isCorrect ? undefined : { color: Theme.color.grey }}
             >
-              <span>미완성</span>
+              <span>{isCorrect ? '완성' : '미완성'}</span>
               <MdVerified size={18} />
             </div>
             <div style={{ color: Theme.color.grey, marginLeft: '5px' }}>

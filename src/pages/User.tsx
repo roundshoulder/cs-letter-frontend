@@ -118,7 +118,11 @@ function User() {
             </div>
           </div>
           {messages.map(message => (
-            <MessageListRenderItem message={message} isMe={user.isMe} />
+            <MessageListRenderItem
+              message={message}
+              isMe={user.isMe}
+              key={message.messageId}
+            />
           ))}
           {user.isMe ? (
             <>

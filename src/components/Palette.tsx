@@ -59,7 +59,11 @@ function Palette({ form, setForm }: Props) {
   return (
     <div className={container}>
       {colors.map((v, i) => (
-        <button className={box} onClick={() => setForm({ ...form, color: i })}>
+        <button
+          className={box}
+          onClick={() => setForm({ ...form, color: i })}
+          key={i}
+        >
           <Circle color={v} selected={form.color === i} />
         </button>
       ))}
