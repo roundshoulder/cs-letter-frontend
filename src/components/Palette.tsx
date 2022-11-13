@@ -15,6 +15,7 @@ function Circle({ color, selected }: { color: string; selected: boolean }) {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: ${Theme.color.black};
     width: 40px;
     height: 40px;
     border-radius: 40px;
