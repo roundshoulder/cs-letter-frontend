@@ -60,7 +60,8 @@ const profileImg = css`
   width: 35px;
   height: 35px;
   border-radius: 35px;
-  box-shadow: 0 0 0 2px ${Theme.color.black} inset;
+  outline: solid 2px ${Theme.color.black};
+  outline-offset: -2px;
 `;
 
 const intro = css`
