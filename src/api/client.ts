@@ -1,4 +1,5 @@
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export const siteURL = 'https://chosung-letter.com';
 // export const siteURL = 'http://localhost:3000';
@@ -8,13 +9,25 @@ const client = axios.create({
   baseURL,
 });
 
+function Logout() {
+  const navigate = useNavigate();
+  clearToken();
+  localStorage.clear();
+  navigate('/');
+}
+
 client.interceptors.response.use(
   response => {
     return response;
   },
-  async (error: AxiosError) => {
+  async error => {
+    const exception = error.response?.data?.exception;
+    // 토큰이 없을 경우 재로그인
+    if (exception === 'java.lang.ClassCastException') {
+      Logout();
+    }
+
     // (1) 만료된 문제면 -> 리프레시 시키고 재요청
-    // (2) 토큰이 있어야되는 요청인데 없으면 -> 로그인창으로 보내고
     // (3) 토큰 있는데 본인 아니면 -> 잘못된 접근입니다. 페이지 보내기
     // if (error.response?.status === 500) {
     //   clearToken();
@@ -32,7 +45,7 @@ client.interceptors.response.use(
     //   }
     //   return axios(previousRequest);
     // } else {
-    throw error;
+    // throw error;
     // }
   }
 );

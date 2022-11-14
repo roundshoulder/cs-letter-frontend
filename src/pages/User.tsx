@@ -137,7 +137,7 @@ function User() {
                   setCursor(v => v + 1);
                 }}
                 direction="foward"
-                enable={messages[messages.length - 1].haveNextMessage}
+                enable={!!messages[messages.length - 1]?.haveNextMessage}
               />
             </div>
           </div>
