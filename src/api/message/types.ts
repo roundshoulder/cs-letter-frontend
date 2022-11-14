@@ -33,7 +33,7 @@ export interface markingParams {
 }
 
 export interface markingResult {
-  body?: string;
+  body: string | null;
   result: boolean[] | null;
   isCorrect: boolean;
   count: number;

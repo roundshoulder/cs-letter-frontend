@@ -18,14 +18,16 @@ const textArea = css`
   font-size: 16px;
   min-height: 320px;
   line-height: 60px;
+  padding: 0px;
+  position: absolute;
+  width: 100%;
+  /* width: calc(100% - ${PADDING}px); */
   :focus {
     outline: none;
   }
 `;
 
 const problemStyle = css`
-  position: absolute;
-  width: calc(100% - ${PADDING}px);
   font-weight: ${Theme.fontWeight.semibold};
   top: -15px;
 `;
@@ -33,8 +35,6 @@ const problemStyle = css`
 const solutionStyle = css`
   z-index: 5;
   top: 10px;
-  position: absolute;
-  width: calc(100% - ${PADDING}px);
   color: ${Theme.color.darkgrey};
 `;
 
@@ -61,23 +61,24 @@ function Read() {
   const textAreaConatainer = css`
     display: flex;
     flex-direction: column;
-    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
     position: relative;
     border: solid 1.5px
       ${markingResult?.isCorrect ? Theme.color.black : Theme.color.grey};
     border-radius: 15px;
+    padding: 0px;
     min-height: 320px;
     margin: 10px 0px 100px 0px;
   `;
 
   useQuery('getDetailMessage', () => getDetailMessage(messageId), {
     onSuccess: (data: getDetailMessageResult) => {
-      console.log(data);
       setData(data);
       if (data.markingResult.body) {
         setAnswer(data.markingResult.body);
       }
-      if (data.markingResult.result) {
+      if (data.markingResult) {
         setMarkingResult(data.markingResult);
         setIsEditable(!data.markingResult.body);
       }
@@ -86,16 +87,14 @@ function Read() {
 
   const { mutate } = useMutation(marking, {
     onSuccess: (data: markingResult) => {
-      console.log(data);
       if (data) {
         setMarkingResult(data);
       }
     },
   });
-
   return (
     <>
-      {data && (
+      {data && markingResult && (
         <>
           <div
             style={{
@@ -116,15 +115,32 @@ function Read() {
             }}
           >
             남은 횟수{' '}
-            <span className={red}>{5 - data.markingResult.count}</span>/5
+            <span className={red}>{5 - data.markingResult.count}</span>
+            /5
           </div>
           {isEditable ? (
             <div className={textAreaConatainer}>
-              <textarea
-                className={`${textArea} ${problemStyle}`}
-                disabled={true}
-                value={data?.body}
-              />
+              {markingResult.result ? (
+                <div className={`${textArea} ${problemStyle}`}>
+                  {markingResult.result.map((v, i) =>
+                    data.body[i] === ' ' ? (
+                      <div key={i}>&nbsp;</div>
+                    ) : v ? (
+                      <span key={i}>{data.body[i]}</span>
+                    ) : (
+                      <span key={i} className={red}>
+                        {data.body[i]}
+                      </span>
+                    )
+                  )}
+                </div>
+              ) : (
+                <textarea
+                  className={`${textArea} ${problemStyle}`}
+                  disabled={true}
+                  value={data?.body}
+                />
+              )}
               <textarea
                 className={`${textArea} ${solutionStyle}`}
                 spellCheck={false}
