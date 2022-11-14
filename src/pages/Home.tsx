@@ -1,5 +1,5 @@
 import { css } from '@emotion/css';
-import Theme from '../assets/Theme';
+import Theme, { PADDING } from '../assets/Theme';
 import KakaoButton from '../components/KakaoButton';
 import Tag from '../components/Tag';
 import { MdMailOutline } from 'react-icons/md';
@@ -39,7 +39,9 @@ function Home() {
         <MdMailOutline size={20} />
         초성편지를 보내보세요!
       </div>
-      <KakaoButton />
+      <div style={{ padding: `0px ${PADDING}px 0px ${PADDING}px` }}>
+        <KakaoButton />
+      </div>
     </>
   );
 }
