@@ -56,12 +56,19 @@ const createButton = css`
   right: 0;
 `;
 
+const profileImgContainer = css`
+  width: 35px;
+  height: 35px;
+  border-radius: 36px;
+  position: relative;
+  overflow: hidden;
+`;
 const profileImg = css`
+  position: absolute;
   width: 35px;
   height: 35px;
   border-radius: 35px;
-  outline: solid 2px ${Theme.color.black};
-  outline-offset: -2px;
+  box-shadow: 0 0 0 2px ${Theme.color.black} inset;
 `;
 
 const intro = css`
@@ -106,11 +113,14 @@ function User() {
         <>
           <div className={profile}>
             <Tag text="To." />
-            <img
-              src={user.kakaoProfileImg}
-              className={profileImg}
-              alt="profile"
-            />
+            <div className={profileImgContainer}>
+              <div className={profileImg} />
+              <img
+                src={user.kakaoProfileImg}
+                alt="profile"
+                style={{ width: '100%', height: `100%`, objectFit: 'cover' }}
+              />
+            </div>
             {user.kakaoNickname}
             {!user.isMe && (
               <Link
