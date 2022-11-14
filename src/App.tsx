@@ -6,9 +6,11 @@ import Create from './pages/Create';
 import Home from './pages/Home';
 import Read from './pages/Read';
 import User from './pages/User';
+import useAuthLoadEffect from './hooks/useAuthLoadEffect';
 
 function App() {
   const queryClient = new QueryClient();
+  useAuthLoadEffect();
   return (
     <QueryClientProvider client={queryClient}>
       <MainContainer>
