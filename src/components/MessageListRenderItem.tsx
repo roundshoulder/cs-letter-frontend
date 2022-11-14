@@ -8,7 +8,7 @@ import Theme from '../assets/Theme';
 const box = css`
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 7px;
   border-bottom: solid 1px #0a0a0a;
   padding: 15px 0px 15px 0px;
 `;
@@ -84,7 +84,7 @@ function MessageListRenderItem({ message, isMe }: Params) {
               height: '100%',
             }}
           />
-          <span>{`${body}...`}</span>
+          <span style={{ paddingLeft: '14px' }}>{`${body}...`}</span>
         </div>
       </div>
     </Container>
