@@ -13,10 +13,10 @@ const arrowButton = css`
   justify-content: center;
   align-items: center;
   border: none;
-  max-width: 35px;
-  width: 35px;
-  height: 35px;
-  border-radius: 35px;
+  max-width: 100px;
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
   color: ${Theme.color.white};
 `;
 
