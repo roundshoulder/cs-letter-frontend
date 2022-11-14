@@ -13,10 +13,10 @@ const arrowButton = css`
   justify-content: center;
   align-items: center;
   border: none;
-  max-width: 100px;
-  width: 100px;
-  height: 100px;
-  border-radius: 100px;
+  max-width: 35px;
+  width: 35px;
+  height: 35px;
+  border-radius: 35px;
   color: ${Theme.color.white};
 `;
 
@@ -36,9 +36,15 @@ function PageNavButton({ onClick, enable, direction }: Params) {
       disabled={!enable}
     >
       {direction === 'back' ? (
-        <MdOutlineArrowBack size={24} />
+        <MdOutlineArrowBack
+          size={24}
+          style={{ minWidth: '24px', minHeight: '24px' }}
+        />
       ) : (
-        <MdOutlineArrowForward size={24} />
+        <MdOutlineArrowForward
+          size={24}
+          style={{ minWidth: '24px', minHeight: '24px' }}
+        />
       )}
     </button>
   );
