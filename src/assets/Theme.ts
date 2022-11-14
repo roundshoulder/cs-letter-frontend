@@ -48,7 +48,7 @@ const tagStyle: { [key: number]: string } = {
   11: css`
     background-color: #fafafa;
     color: #0a0a0a;
-    border: solid 2px #0a0a0a;
+    box-shadow: 0 0 0 2px #0a0a0a inset;
   `,
 };
 const color: { [key: string]: string } = {
