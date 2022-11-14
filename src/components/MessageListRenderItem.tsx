@@ -31,7 +31,6 @@ interface Params {
 }
 
 function MessageListRenderItem({ message, isMe }: Params) {
-  console.log(isMe);
   const { body, color, messageId, nickname, time, isCorrect } = message;
   function Container({ children }: { children: ReactNode }) {
     return isMe ? (
@@ -75,7 +74,18 @@ function MessageListRenderItem({ message, isMe }: Params) {
             </div>
           </div>
         </div>
-        <span>{body}</span>
+        <div style={{ position: 'relative' }}>
+          <div
+            style={{
+              position: 'absolute',
+              backgroundImage:
+                'linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1))',
+              width: '100%',
+              height: '100%',
+            }}
+          />
+          <span>{`${body}...`}</span>
+        </div>
       </div>
     </Container>
   );

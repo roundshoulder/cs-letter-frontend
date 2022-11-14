@@ -1,6 +1,7 @@
 import client from '../client';
 import {
   createMessageParams,
+  getDetailMessageResult,
   getMessageParams,
   markingParams,
   Message,
@@ -19,11 +20,13 @@ export async function createMessage(params: createMessageParams) {
 }
 
 export async function getDetailMessage(messageId: string) {
-  const response = await client.get(`/marking/${messageId}`);
+  const response = await client.get<getDetailMessageResult>(
+    `/message/${messageId}`
+  );
   return response.data;
 }
 
 export async function marking(params: markingParams) {
   const response = await client.post(`/marking`, params);
-  return response;
+  return response.data;
 }

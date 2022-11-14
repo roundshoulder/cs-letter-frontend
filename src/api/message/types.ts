@@ -17,9 +17,25 @@ export interface Message extends createMessageParams {
   isCorrect: boolean;
 }
 
-export interface DetailMessage extends createMessageParams {}
+export interface getDetailMessageResult extends createMessageParams {
+  body: string;
+  color: number;
+  messageId: number;
+  nickname: string;
+  time: string;
+  toMemberToken: string;
+  markingResult: markingResult;
+}
 
 export interface markingParams {
   body: string;
   messageId: number;
+}
+
+export interface markingResult {
+  body?: string;
+  result: boolean[] | null;
+  isCorrect: boolean;
+  count: number;
+  totalCount: number;
 }

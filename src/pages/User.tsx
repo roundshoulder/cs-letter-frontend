@@ -13,6 +13,7 @@ import { getUserResult } from '../api/user/type';
 import { getMessage } from '../api/message';
 import { Message } from '../api/message/types';
 import PageNavButton from '../components/PageNavButton';
+import { siteURL } from '../api/client';
 
 const profile = css`
   position: relative;
@@ -62,6 +63,12 @@ const profileImg = css`
   border: solid 2px ${Theme.color.black};
 `;
 
+const intro = css`
+  font-weight: ${Theme.fontWeight.semibold};
+  text-align: center;
+  margin: 55px 0px 15px 0px;
+`;
+
 function User() {
   const memberToken = useLocation().pathname.split('/')[2];
   const [user, setUser] = useState<getUserResult | null>(null);
@@ -74,11 +81,24 @@ function User() {
     },
   });
 
-  useQuery('getMessage', () => getMessage({ memberToken, cursor }), {
-    onSuccess: data => {
-      setMessages(data);
-    },
-  });
+  useQuery(
+    ['getMessage', { cursor }],
+    () =>
+      getMessage(
+        cursor !== 0 && !!messages
+          ? {
+              memberToken: memberToken,
+              cursor: messages[messages.length - 1].messageId,
+            }
+          : { memberToken, cursor }
+      ),
+    {
+      onSuccess: data => {
+        console.log(data);
+        setMessages(data);
+      },
+    }
+  );
   return (
     <>
       {user && messages && (
@@ -105,13 +125,17 @@ function User() {
             <Tag text="From." />
             <div className={arrowButtonContainer}>
               <PageNavButton
-                onClick={() => setCursor(v => v - 1)}
+                onClick={() => {
+                  setCursor(v => v - 1);
+                }}
                 direction="back"
                 enable={cursor !== 0}
               />
               {cursor + 1}
               <PageNavButton
-                onClick={() => setCursor(v => v + 1)}
+                onClick={() => {
+                  setCursor(v => v + 1);
+                }}
                 direction="foward"
                 enable={messages[messages.length - 1].haveNextMessage}
               />
@@ -126,13 +150,20 @@ function User() {
           ))}
           {user.isMe ? (
             <>
-              <div>{`누르기만 해도 링크복사 :-)`}</div>
-              <BottomButton isShare={true}>공유하고 초성편지받기</BottomButton>
+              <div className={intro}>{`누르기만 해도 링크복사 :-)`}</div>
+              <BottomButton
+                isShare={true}
+                onClick={() => {
+                  navigator.clipboard.writeText(`${siteURL}/u/${memberToken}`);
+                }}
+              >
+                공유하고 초성편지받기
+              </BottomButton>
             </>
           ) : (
             !localStorage.getItem('refreshToken') && (
               <>
-                <div>초성편지 나도 받고 싶다면,</div>
+                <div className={intro}>초성편지 나도 받고 싶다면,</div>
                 <KakaoButton />
               </>
             )
