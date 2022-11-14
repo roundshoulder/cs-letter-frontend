@@ -15,6 +15,7 @@ const kakaoButton = css`
   background-color: #fee500;
   text-decoration: none;
   font-weight: ${Theme.fontWeight.bold};
+  color: ${Theme.color.black};
 `;
 
 function KakaoButton() {

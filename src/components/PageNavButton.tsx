@@ -13,19 +13,19 @@ const arrowButton = css`
   justify-content: center;
   align-items: center;
   border: none;
+  max-width: 35px;
   width: 35px;
   height: 35px;
   border-radius: 35px;
   font-size: 24px;
+  color: ${Theme.color.white};
 `;
 
 const enableStyle = css`
-  color: ${Theme.color.white};
   background-color: ${Theme.color.black};
 `;
 
 const disableStyle = css`
-  color: ${Theme.color.white};
   background-color: ${Theme.color.grey};
 `;
 
@@ -36,10 +36,11 @@ function PageNavButton({ onClick, enable, direction }: Params) {
       onClick={onClick}
       disabled={!enable}
     >
+      <MdOutlineArrowBack color="black" />
       {direction === 'back' ? (
-        <MdOutlineArrowBack color={Theme.color.white} />
+        <MdOutlineArrowBack />
       ) : (
-        <MdOutlineArrowForward color={Theme.color.white} />
+        <MdOutlineArrowForward />
       )}
     </button>
   );
