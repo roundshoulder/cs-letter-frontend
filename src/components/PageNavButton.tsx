@@ -17,7 +17,6 @@ const arrowButton = css`
   width: 35px;
   height: 35px;
   border-radius: 35px;
-  font-size: 24px;
   color: ${Theme.color.white};
 `;
 
@@ -36,11 +35,10 @@ function PageNavButton({ onClick, enable, direction }: Params) {
       onClick={onClick}
       disabled={!enable}
     >
-      <MdOutlineArrowBack color="black" />
       {direction === 'back' ? (
-        <MdOutlineArrowBack />
+        <MdOutlineArrowBack size={24} />
       ) : (
-        <MdOutlineArrowForward />
+        <MdOutlineArrowForward size={24} />
       )}
     </button>
   );
