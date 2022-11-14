@@ -28,7 +28,7 @@ const textArea = css`
 `;
 
 const problemStyle = css`
-  font-weight: ${Theme.fontWeight.semibold};
+  /* font-weight: ${Theme.fontWeight.semibold}; */
   top: -15px;
 `;
 
@@ -110,6 +110,7 @@ function Read() {
           <div
             style={{
               textAlign: 'end',
+              paddingRight: '14px',
               fontSize: '11px',
               fontWeight: Theme.fontWeight.semibold,
             }}
@@ -121,7 +122,7 @@ function Read() {
           {isEditable ? (
             <div className={textAreaConatainer}>
               {markingResult.result ? (
-                <div className={`${textArea} ${problemStyle}`}>
+                <div className={`${textArea} ${problemStyle} areafont`}>
                   {markingResult.result.map((v, i) =>
                     data.body[i] === ' ' ? (
                       <div key={i}>&nbsp;</div>
@@ -136,13 +137,13 @@ function Read() {
                 </div>
               ) : (
                 <textarea
-                  className={`${textArea} ${problemStyle}`}
+                  className={`${textArea} ${problemStyle} areafont`}
                   disabled={true}
                   value={data?.body}
                 />
               )}
               <textarea
-                className={`${textArea} ${solutionStyle}`}
+                className={`${textArea} ${solutionStyle} areafont`}
                 spellCheck={false}
                 value={answer}
                 maxLength={data.body.length}
@@ -152,7 +153,7 @@ function Read() {
             </div>
           ) : (
             <button
-              className={textAreaConatainer}
+              className={`${textAreaConatainer} areafont`}
               onClick={() => setIsEditable(true)}
               style={{ background: 'none' }}
             >
