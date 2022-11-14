@@ -84,7 +84,9 @@ function MessageListRenderItem({ message, isMe }: Params) {
               height: '100%',
             }}
           />
-          <span style={{ paddingLeft: '14px' }}>{`${body}...`}</span>
+          <span style={{ paddingLeft: '14px' }}>
+            {body.length < 20 ? body : `${body}...`}
+          </span>
         </div>
       </div>
     </Container>
