@@ -35,9 +35,14 @@ const nicknameInput = css`
 const bodyTextArea = css`
   border: solid 2px ${Theme.color.grey};
   border-radius: 15px;
-  min-height: 80px;
+  min-height: 170px;
   resize: none;
   background: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  line-height: 36px;
+  padding-top: 6px;
 `;
 
 const enableArea = css`

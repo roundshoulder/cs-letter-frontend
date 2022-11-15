@@ -5,37 +5,44 @@ import { getDetailMessage, marking } from '../api/message';
 import { useLocation } from 'react-router-dom';
 import { getDetailMessageResult, markingResult } from '../api/message/types';
 import Tag from '../components/Tag';
-import Theme, { PADDING } from '../assets/Theme';
+import Theme from '../assets/Theme';
 import BottomButton from '../components/BottomButton';
 import { MdCheck } from 'react-icons/md';
 
 const textArea = css`
   display: flex;
   flex-wrap: wrap;
+  align-content: flex-start;
   background: none;
   resize: none;
   border: none;
   font-size: 16px;
   min-height: 320px;
-  line-height: 60px;
+  line-height: 72px;
   padding: 0px;
   position: absolute;
-  width: 100%;
-  /* width: calc(100% - ${PADDING}px); */
+  width: calc(100% - 30px);
+  color: ${Theme.color.black};
   :focus {
     outline: none;
   }
+  background-color: rgba(0, 0, 255, 0.2);
 `;
 
 const problemStyle = css`
-  /* font-weight: ${Theme.fontWeight.semibold}; */
+  font-weight: ${Theme.fontWeight.semibold};
   top: -15px;
 `;
 
 const solutionStyle = css`
   z-index: 5;
-  top: 10px;
+  top: 11px;
   color: ${Theme.color.darkgrey};
+`;
+
+const word = css`
+  height: 72px;
+  color: ${Theme.color.black};
 `;
 
 const red = css`
@@ -67,10 +74,27 @@ function Read() {
     border: solid 1.5px
       ${markingResult?.isCorrect ? Theme.color.black : Theme.color.grey};
     border-radius: 15px;
-    padding: 0px;
+    padding: 15px;
     min-height: 320px;
     margin: 10px 0px 100px 0px;
+    background-color: yellow;
   `;
+
+  function WordRenderItem({ v, i, w }: { v: boolean; i: number; w: string }) {
+    return (
+      <>
+        {w === ' ' ? (
+          <div key={i} className={`${word} ${!v && red}`}>
+            &nbsp;
+          </div>
+        ) : (
+          <div key={i} className={`${word} ${!v && red}`}>
+            {w}
+          </div>
+        )}
+      </>
+    );
+  }
 
   useQuery('getDetailMessage', () => getDetailMessage(messageId), {
     onSuccess: (data: getDetailMessageResult) => {
@@ -123,17 +147,9 @@ function Read() {
             <div className={textAreaConatainer}>
               {markingResult.result ? (
                 <div className={`${textArea} ${problemStyle} areafont`}>
-                  {markingResult.result.map((v, i) =>
-                    data.body[i] === ' ' ? (
-                      <div key={i}>&nbsp;</div>
-                    ) : v ? (
-                      <span key={i}>{data.body[i]}</span>
-                    ) : (
-                      <span key={i} className={red}>
-                        {data.body[i]}
-                      </span>
-                    )
-                  )}
+                  {markingResult.result.map((v, i) => (
+                    <WordRenderItem v={v} i={i} w={data.body[i]} />
+                  ))}
                 </div>
               ) : (
                 <textarea
@@ -159,31 +175,15 @@ function Read() {
             >
               <div className={`${textArea} ${problemStyle}`}>
                 {markingResult?.result &&
-                  markingResult.result.map((v, i) =>
-                    data.body[i] === ' ' ? (
-                      <div key={i}>&nbsp;</div>
-                    ) : v ? (
-                      <span key={i}>{data.body[i]}</span>
-                    ) : (
-                      <span key={i} className={red}>
-                        {data.body[i]}
-                      </span>
-                    )
-                  )}
+                  markingResult.result.map((v, i) => (
+                    <WordRenderItem v={v} i={i} w={data.body[i]} />
+                  ))}
               </div>
               <div className={`${textArea} ${solutionStyle}`}>
                 {markingResult?.result &&
-                  markingResult.result.map((v, i) =>
-                    data.body[i] === ' ' ? (
-                      <div key={i}>&nbsp;</div>
-                    ) : v ? (
-                      <span key={i}>{answer[i]}</span>
-                    ) : (
-                      <span key={i} className={red}>
-                        {answer[i]}
-                      </span>
-                    )
-                  )}
+                  markingResult.result.map((v, i) => (
+                    <WordRenderItem v={v} i={i} w={answer[i]} />
+                  ))}
               </div>
               {markingResult?.isCorrect && <MdCheck className={check} />}
             </button>
