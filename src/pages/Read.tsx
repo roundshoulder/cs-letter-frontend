@@ -200,7 +200,7 @@ function Read() {
             }}
           >
             {markingResult?.isCorrect
-              ? `${data.markingResult.totalCount}회만에 맞췄어요!`
+              ? `${markingResult.totalCount}회만에 맞췄어요!`
               : '확인하기'}
           </BottomButton>
         </>
