@@ -138,8 +138,7 @@ function Read() {
               fontWeight: Theme.fontWeight.semibold,
             }}
           >
-            남은 횟수{' '}
-            <span className={red}>{5 - data.markingResult.count}</span>
+            남은 횟수 <span className={red}>{5 - markingResult.count}</span>
             /5
           </div>
           {isEditable ? (
