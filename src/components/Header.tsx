@@ -34,6 +34,14 @@ const iconButton = css`
   color: ${Theme.color.white};
 `;
 
+const logoButton = css`
+  width: 70px;
+  border: none;
+  background: none;
+  color: ${Theme.color.white};
+  padding: 0px;
+`;
+
 function Header() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -53,8 +61,8 @@ function Header() {
           </button>
         )}
       </div>
-      <button onClick={() => navigate('/')} className={iconButton}>
-        <img src={logo} alt="chosung letter logo" />
+      <button onClick={() => navigate('/')} className={logoButton}>
+        <img src={logo} alt="chosung letter logo" width={70} />
       </button>
       <div className={iconContainer} style={{ justifyContent: 'flex-end' }}>
         {isUserPage && (
