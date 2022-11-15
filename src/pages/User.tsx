@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import Theme from '../assets/Theme';
 import MessageListRenderItem from '../components/MessageListRenderItem';
 import Tag from '../components/Tag';
-import { MdOutlineCreate } from 'react-icons/md';
+import { MdOutlineCreate, MdDownloadDone } from 'react-icons/md';
 import { useState } from 'react';
 import BottomButton from '../components/BottomButton';
 import KakaoButton from '../components/KakaoButton';
@@ -82,6 +82,7 @@ function User() {
   const [user, setUser] = useState<getUserResult | null>(null);
   const [cursor, setCursor] = useState<number>(0);
   const [messages, setMessages] = useState<Message[] | null>(null);
+  const [copy, setCopy] = useState<boolean>(false);
 
   useQuery('getUser', () => getUser(memberToken), {
     onSuccess: (data: getUserResult) => {
@@ -102,7 +103,6 @@ function User() {
       ),
     {
       onSuccess: data => {
-        console.log(data);
         setMessages(data);
       },
     }
@@ -166,10 +166,31 @@ function User() {
                 isShare={true}
                 onClick={() => {
                   navigator.clipboard.writeText(`${siteURL}/u/${memberToken}`);
+                  setCopy(true);
+                  setTimeout(() => {
+                    setCopy(false);
+                  }, 3000);
                 }}
               >
                 공유하고 초성편지받기
               </BottomButton>
+              <div style={{ height: '30px', marginTop: '13px' }}>
+                {copy && (
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '5px',
+                      fontSize: '11px',
+                      fontWeight: Theme.fontWeight.bold,
+                    }}
+                  >
+                    <MdDownloadDone size={16} />
+                    링크가 복사되었습니다
+                  </div>
+                )}
+              </div>
             </>
           ) : (
             !localStorage.getItem('refreshToken') && (
