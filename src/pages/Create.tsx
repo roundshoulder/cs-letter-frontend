@@ -33,10 +33,15 @@ const nicknameInput = css`
   border-bottom: solid 1px ${Theme.color.grey};
 `;
 const bodyTextArea = css`
-  border: solid 1.5px ${Theme.color.grey};
+  border: solid 2px ${Theme.color.grey};
   border-radius: 15px;
   min-height: 80px;
   resize: none;
+  background: none;
+`;
+
+const enableArea = css`
+  border: solid 2px ${Theme.color.black};
 `;
 
 function Create() {
@@ -105,7 +110,7 @@ function Create() {
           {name}
         </div>
         <textarea
-          className={bodyTextArea}
+          className={`${bodyTextArea} ${enableArea}`}
           placeholder="전하고 싶은 메세지를 입력해주세요."
           onChange={e => {
             setForm({ ...form, body: e.target.value });
