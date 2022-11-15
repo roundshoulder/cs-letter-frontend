@@ -26,7 +26,7 @@ const textArea = css`
   :focus {
     outline: none;
   }
-  background-color: rgba(0, 0, 255, 0.2);
+  /* background-color: rgba(0, 0, 255, 0.2); */
 `;
 
 const problemStyle = css`
@@ -68,7 +68,6 @@ function Read() {
   const textAreaConatainer = css`
     display: flex;
     flex-direction: column;
-    min-width: 100%;
     max-width: 100%;
     position: relative;
     border: solid 1.5px
@@ -77,7 +76,7 @@ function Read() {
     padding: 15px;
     min-height: 320px;
     margin: 10px 0px 100px 0px;
-    background-color: yellow;
+    /* background-color: yellow; */
   `;
 
   function WordRenderItem({ v, i, w }: { v: boolean; i: number; w: string }) {
