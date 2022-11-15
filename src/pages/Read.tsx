@@ -193,6 +193,7 @@ function Read() {
               (answer !== data.markingResult.body && answer !== '') ||
               markingResult?.isCorrect
             }
+            isCorrect={markingResult?.isCorrect && true}
             onClick={() => {
               mutate({ body: answer, messageId: data.messageId });
               setIsEditable(false);
