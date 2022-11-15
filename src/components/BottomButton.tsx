@@ -33,7 +33,11 @@ function BottomButton({
   `;
 
   return (
-    <button className={button} onClick={onClick} disabled={isCorrect}>
+    <button
+      className={button}
+      onClick={onClick}
+      disabled={isCorrect || !enable}
+    >
       {isShare && <MdShare size={22} />}
       {children}
     </button>

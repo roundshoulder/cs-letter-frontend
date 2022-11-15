@@ -108,7 +108,7 @@ function Read() {
     },
   });
 
-  const { mutate } = useMutation(marking, {
+  const { mutate, isLoading } = useMutation(marking, {
     onSuccess: (data: markingResult) => {
       if (data) {
         setMarkingResult(data);
@@ -133,7 +133,7 @@ function Read() {
           <div
             style={{
               textAlign: 'end',
-              paddingRight: '14px',
+              paddingRight: '12px',
               fontSize: '11px',
               fontWeight: Theme.fontWeight.semibold,
             }}
@@ -183,12 +183,17 @@ function Read() {
                     <WordRenderItem v={v} i={i} w={answer[i]} />
                   ))}
               </div>
-              {markingResult?.isCorrect && <MdCheck className={check} />}
+              {markingResult?.isCorrect && (
+                <MdCheck className={check} color={Theme.color.black} />
+              )}
             </button>
           )}
           <BottomButton
             enable={
-              (answer !== data.markingResult.body && answer !== '') ||
+              (answer !== data.markingResult.body &&
+                answer !== '' &&
+                5 - markingResult.count > 0 &&
+                !isLoading) ||
               markingResult?.isCorrect
             }
             isCorrect={markingResult?.isCorrect && true}
