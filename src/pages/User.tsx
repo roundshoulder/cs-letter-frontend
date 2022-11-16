@@ -83,6 +83,7 @@ function User() {
   const [cursor, setCursor] = useState<number>(0);
   const [messages, setMessages] = useState<Message[] | null>(null);
   const [copy, setCopy] = useState<boolean>(false);
+  const url = window.location.href;
 
   useQuery('getUser', () => getUser(memberToken), {
     onSuccess: (data: getUserResult) => {
@@ -165,19 +166,17 @@ function User() {
               <BottomButton
                 isShare={true}
                 onClick={() => {
-                  navigator.clipboard
-                    .writeText(`${siteURL}/u/${memberToken}`)
-                    .then(
-                      () => {
-                        setCopy(true);
-                        setTimeout(() => {
-                          setCopy(false);
-                        }, 3000);
-                      },
-                      e => {
-                        alert(e);
-                      }
-                    );
+                  navigator.clipboard.writeText(url).then(
+                    () => {
+                      setCopy(true);
+                      setTimeout(() => {
+                        setCopy(false);
+                      }, 3000);
+                    },
+                    e => {
+                      alert(e);
+                    }
+                  );
                 }}
               >
                 공유하고 초성편지받기
