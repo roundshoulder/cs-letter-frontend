@@ -13,7 +13,6 @@ import { getUserResult } from '../api/user/type';
 import { getMessage } from '../api/message';
 import { Message } from '../api/message/types';
 import PageNavButton from '../components/PageNavButton';
-import { siteURL } from '../api/client';
 
 const profile = css`
   position: relative;
