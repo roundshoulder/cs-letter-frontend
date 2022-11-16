@@ -165,11 +165,19 @@ function User() {
               <BottomButton
                 isShare={true}
                 onClick={() => {
-                  navigator.clipboard.writeText(`${siteURL}/u/${memberToken}`);
-                  setCopy(true);
-                  setTimeout(() => {
-                    setCopy(false);
-                  }, 3000);
+                  navigator.clipboard
+                    .writeText(`${siteURL}/u/${memberToken}`)
+                    .then(
+                      () => {
+                        setCopy(true);
+                        setTimeout(() => {
+                          setCopy(false);
+                        }, 3000);
+                      },
+                      e => {
+                        alert(e);
+                      }
+                    );
                 }}
               >
                 공유하고 초성편지받기
