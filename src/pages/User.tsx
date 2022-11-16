@@ -13,6 +13,7 @@ import { getUserResult } from '../api/user/type';
 import { getMessage } from '../api/message';
 import { Message } from '../api/message/types';
 import PageNavButton from '../components/PageNavButton';
+import CopyToClipboard from 'react-copy-to-clipboard';
 
 const profile = css`
   position: relative;
@@ -162,24 +163,17 @@ function User() {
           {user.isMe ? (
             <>
               <div className={intro}>{`누르기만 해도 링크복사 :-)`}</div>
-              <BottomButton
-                isShare={true}
-                onClick={() => {
-                  navigator.clipboard.writeText(url).then(
-                    () => {
-                      setCopy(true);
-                      setTimeout(() => {
-                        setCopy(false);
-                      }, 3000);
-                    },
-                    e => {
-                      alert(e);
-                    }
-                  );
+              <CopyToClipboard
+                text={url}
+                onCopy={() => {
+                  setCopy(true);
+                  setTimeout(() => setCopy(false), 3000);
                 }}
               >
-                공유하고 초성편지받기
-              </BottomButton>
+                <BottomButton isShare={true}>
+                  공유하고 초성편지받기
+                </BottomButton>
+              </CopyToClipboard>
               <div style={{ height: '30px', marginTop: '13px' }}>
                 {copy && (
                   <div
