@@ -60,9 +60,9 @@ function Read() {
   const messageId = useLocation().pathname.split('/')[2];
   const [isEditable, setIsEditable] = useState(true);
   const [answer, setAnswer] = useState('');
-  const [markingResult, setMarkingResult] = useState<markingResult | null>(
-    null
-  );
+  // const [markingResult, setMarkingResult] = useState<markingResult | null>(
+  //   null
+  // );
   const [data, setData] = useState<getDetailMessageResult | null>(null);
 
   const textAreaConatainer = css`
@@ -71,25 +71,20 @@ function Read() {
     max-width: 100%;
     position: relative;
     border: solid 1.5px
-      ${markingResult?.isCorrect ? Theme.color.black : Theme.color.grey};
+      ${data?.markingResult?.isCorrect ? Theme.color.black : Theme.color.grey};
     border-radius: 15px;
     padding: 15px;
     min-height: 320px;
     margin: 10px 0px 100px 0px;
-    /* background-color: yellow; */
   `;
 
-  function WordRenderItem({ v, i, w }: { v: boolean; i: number; w: string }) {
+  function WordRenderItem({ v, w }: { v: boolean; w: string }) {
     return (
       <>
         {w === ' ' ? (
-          <div key={i} className={`${word} ${!v && red}`}>
-            &nbsp;
-          </div>
+          <div className={`${word} ${!v && red}`}>&nbsp;</div>
         ) : (
-          <div key={i} className={`${word} ${!v && red}`}>
-            {w}
-          </div>
+          <div className={`${word} ${!v && red}`}>{w}</div>
         )}
       </>
     );
@@ -97,27 +92,29 @@ function Read() {
 
   useQuery('getDetailMessage', () => getDetailMessage(messageId), {
     onSuccess: (data: getDetailMessageResult) => {
+      console.log('first');
       setData(data);
       if (data.markingResult.body) {
         setAnswer(data.markingResult.body);
       }
       if (data.markingResult) {
-        setMarkingResult(data.markingResult);
         setIsEditable(!data.markingResult.body);
       }
     },
+    refetchOnWindowFocus: false,
   });
 
   const { mutate, isLoading } = useMutation(marking, {
-    onSuccess: (data: markingResult) => {
-      if (data) {
-        setMarkingResult(data);
+    onSuccess: (v: markingResult) => {
+      console.log('second');
+      if (data && v) {
+        setData({ ...data, markingResult: v });
       }
     },
   });
   return (
     <>
-      {data && markingResult && (
+      {data && (
         <>
           <div
             style={{
@@ -138,15 +135,16 @@ function Read() {
               fontWeight: Theme.fontWeight.semibold,
             }}
           >
-            남은 횟수 <span className={red}>{5 - markingResult.count}</span>
+            남은 횟수{' '}
+            <span className={red}>{5 - data.markingResult.count}</span>
             /5
           </div>
           {isEditable ? (
             <div className={textAreaConatainer}>
-              {markingResult.result ? (
+              {data.markingResult.result ? (
                 <div className={`${textArea} ${problemStyle} areafont`}>
-                  {markingResult.result.map((v, i) => (
-                    <WordRenderItem v={v} i={i} w={data.body[i]} />
+                  {data.markingResult.result.map((v, i) => (
+                    <WordRenderItem key={i} v={v} w={data.body[i]} />
                   ))}
                 </div>
               ) : (
@@ -163,7 +161,7 @@ function Read() {
                 maxLength={data.body.length}
                 onChange={e => setAnswer(e.target.value)}
               />
-              {markingResult?.isCorrect && <MdCheck className={check} />}
+              {data.markingResult?.isCorrect && <MdCheck className={check} />}
             </div>
           ) : (
             <button
@@ -172,38 +170,38 @@ function Read() {
               style={{ background: 'none' }}
             >
               <div className={`${textArea} ${problemStyle}`}>
-                {markingResult?.result &&
-                  markingResult.result.map((v, i) => (
-                    <WordRenderItem v={v} i={i} w={data.body[i]} />
+                {data.markingResult?.result &&
+                  data.markingResult.result.map((v, i) => (
+                    <WordRenderItem key={i} v={v} w={data.body[i]} />
                   ))}
               </div>
               <div className={`${textArea} ${solutionStyle}`}>
-                {markingResult?.result &&
-                  markingResult.result.map((v, i) => (
-                    <WordRenderItem v={v} i={i} w={answer[i]} />
+                {data.markingResult?.result &&
+                  data.markingResult.result.map((v, i) => (
+                    <WordRenderItem key={i} v={v} w={answer[i]} />
                   ))}
               </div>
-              {markingResult?.isCorrect && (
+              {data.markingResult?.isCorrect && (
                 <MdCheck className={check} color={Theme.color.black} />
               )}
             </button>
           )}
           <BottomButton
             enable={
-              (answer !== markingResult.body &&
+              (answer !== data.markingResult.body &&
                 answer !== '' &&
-                5 - markingResult.count > 0 &&
+                5 - data.markingResult.count > 0 &&
                 !isLoading) ||
-              markingResult?.isCorrect
+              data.markingResult?.isCorrect
             }
-            isCorrect={markingResult?.isCorrect && true}
+            isCorrect={data.markingResult?.isCorrect && true}
             onClick={() => {
               mutate({ body: answer, messageId: data.messageId });
               setIsEditable(false);
             }}
           >
-            {markingResult?.isCorrect
-              ? `${markingResult.totalCount}회만에 맞췄어요!`
+            {data.markingResult?.isCorrect
+              ? `${data.markingResult.totalCount}회만에 맞췄어요!`
               : '확인하기'}
           </BottomButton>
         </>
