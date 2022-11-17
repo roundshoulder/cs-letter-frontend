@@ -190,7 +190,7 @@ function Read() {
           )}
           <BottomButton
             enable={
-              (answer !== data.markingResult.body &&
+              (answer !== markingResult.body &&
                 answer !== '' &&
                 5 - markingResult.count > 0 &&
                 !isLoading) ||
