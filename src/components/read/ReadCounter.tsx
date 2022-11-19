@@ -23,13 +23,20 @@ const textContainer = css`
 const infoButton = css`
   position: relative;
   display: flex;
+  width: 14px;
+  height: 14px;
+  background: none;
   justify-content: center;
   align-items: center;
-  border-radius: 14px;
   border: none;
+`;
+
+const infoButtonBackground = css`
+  position: absolute;
   width: 14px;
   height: 14px;
   background-color: ${Theme.color.black};
+  border-radius: 14px;
 `;
 
 const infoButtonText = css`
@@ -92,6 +99,7 @@ function ReadCounter({ count }: { count: number }) {
           오늘 남은 횟수 <span style={{ color: 'red' }}>{5 - count}</span>/5
         </div>
         <button className={infoButton} onClick={alert}>
+          <div className={infoButtonBackground} />
           <div className={infoButtonText}>?</div>
         </button>
       </div>
