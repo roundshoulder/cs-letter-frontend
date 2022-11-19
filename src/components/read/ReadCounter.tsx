@@ -27,6 +27,7 @@ const infoButton = css`
   border-radius: 14px;
   border: none;
   width: 14px;
+  max-width: 14px;
   height: 14px;
   font-size: 9px;
   background-color: ${Theme.color.black};
