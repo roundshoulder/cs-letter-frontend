@@ -8,6 +8,7 @@ import Tag from '../components/Tag';
 import Theme from '../assets/Theme';
 import BottomButton from '../components/BottomButton';
 import { MdCheck } from 'react-icons/md';
+import ReadCounter from '../components/read/ReadCounter';
 
 const textArea = css`
   display: flex;
@@ -26,7 +27,6 @@ const textArea = css`
   :focus {
     outline: none;
   }
-  /* background-color: rgba(0, 0, 255, 0.2); */
 `;
 
 const problemStyle = css`
@@ -60,9 +60,6 @@ function Read() {
   const messageId = useLocation().pathname.split('/')[2];
   const [isEditable, setIsEditable] = useState(true);
   const [answer, setAnswer] = useState('');
-  // const [markingResult, setMarkingResult] = useState<markingResult | null>(
-  //   null
-  // );
   const [data, setData] = useState<getDetailMessageResult | null>(null);
 
   const textAreaConatainer = css`
@@ -121,24 +118,12 @@ function Read() {
               display: 'flex',
               flexDirection: 'row',
               gap: '10px',
-              marginBottom: '30px',
             }}
           >
             <Tag text="From." />
             <Tag text={data.nickname} color={data.color} />
           </div>
-          <div
-            style={{
-              textAlign: 'end',
-              paddingRight: '12px',
-              fontSize: '11px',
-              fontWeight: Theme.fontWeight.semibold,
-            }}
-          >
-            남은 횟수{' '}
-            <span className={red}>{5 - data.markingResult.count}</span>
-            /5
-          </div>
+          <ReadCounter count={data.markingResult.count} />
           {isEditable ? (
             <div className={textAreaConatainer}>
               {data.markingResult.result ? (
