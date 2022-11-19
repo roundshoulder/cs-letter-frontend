@@ -1,22 +1,46 @@
 @font-face {
   font-family: 'SUIT';
   font-weight: 400;
+  font-style: normal;
   src: url('https://cdn.jsdelivr.net/gh/webfontworld/sunn/SUIT-Regular.eot');
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/sunn/SUIT-Regular.eot?#iefix') format('embedded-opentype'),
+      url('https://cdn.jsdelivr.net/gh/webfontworld/sunn/SUIT-Regular.woff2') format('woff2'),
+      url('https://cdn.jsdelivr.net/gh/webfontworld/sunn/SUIT-Regular.woff') format('woff'),
+      url('https://cdn.jsdelivr.net/gh/webfontworld/sunn/SUIT-Regular.ttf') format("truetype");
+  font-display: swap;
 }
 @font-face {
   font-family: 'SUIT';
   font-weight: 500;
+  font-style: normal;
   src: url('https://cdn.jsdelivr.net/gh/webfontworld/sunn/SUIT-Medium.eot');
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/sunn/SUIT-Medium.eot?#iefix') format('embedded-opentype'),
+      url('https://cdn.jsdelivr.net/gh/webfontworld/sunn/SUIT-Medium.woff2') format('woff2'),
+      url('https://cdn.jsdelivr.net/gh/webfontworld/sunn/SUIT-Medium.woff') format('woff'),
+      url('https://cdn.jsdelivr.net/gh/webfontworld/sunn/SUIT-Medium.ttf') format("truetype");
+  font-display: swap;
 }
 @font-face {
   font-family: 'SUIT';
   font-weight: 600;
+  font-style: normal;
   src: url('https://cdn.jsdelivr.net/gh/webfontworld/sunn/SUIT-SemiBold.eot');
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/sunn/SUIT-SemiBold.eot?#iefix') format('embedded-opentype'),
+      url('https://cdn.jsdelivr.net/gh/webfontworld/sunn/SUIT-SemiBold.woff2') format('woff2'),
+      url('https://cdn.jsdelivr.net/gh/webfontworld/sunn/SUIT-SemiBold.woff') format('woff'),
+      url('https://cdn.jsdelivr.net/gh/webfontworld/sunn/SUIT-SemiBold.ttf') format("truetype");
+  font-display: swap;
 }
 @font-face {
   font-family: 'SUIT';
   font-weight: 700;
+  font-style: normal;
   src: url('https://cdn.jsdelivr.net/gh/webfontworld/sunn/SUIT-Bold.eot');
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/sunn/SUIT-Bold.eot?#iefix') format('embedded-opentype'),
+      url('https://cdn.jsdelivr.net/gh/webfontworld/sunn/SUIT-Bold.woff2') format('woff2'),
+      url('https://cdn.jsdelivr.net/gh/webfontworld/sunn/SUIT-Bold.woff') format('woff'),
+      url('https://cdn.jsdelivr.net/gh/webfontworld/sunn/SUIT-Bold.ttf') format("truetype");
+  font-display: swap;
 }
 
 html, body {
