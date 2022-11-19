@@ -25,11 +25,11 @@ const infoButton = css`
   display: flex;
   width: 14px;
   height: 14px;
+  padding: 0px;
   background: none;
   justify-content: center;
   align-items: center;
   border: none;
-  background-color: red;
 `;
 
 const infoButtonBackground = css`
