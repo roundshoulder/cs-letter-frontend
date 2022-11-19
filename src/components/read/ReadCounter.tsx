@@ -29,6 +29,7 @@ const infoButton = css`
   justify-content: center;
   align-items: center;
   border: none;
+  background-color: red;
 `;
 
 const infoButtonBackground = css`
