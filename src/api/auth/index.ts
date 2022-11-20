@@ -1,4 +1,5 @@
 import client from '../client';
+import { RefreshParams } from './types';
 
 // 로그인
 export async function login(authorizationCode: string) {
@@ -8,4 +9,9 @@ export async function login(authorizationCode: string) {
     refreshToken: response.headers.refreshtoken,
     memberToken: response.data.memberToken,
   };
+}
+
+export async function refresh(params: RefreshParams) {
+  const response = await client.post<RefreshParams>(`/reIssue`, params);
+  return response.data;
 }

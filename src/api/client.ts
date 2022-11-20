@@ -1,5 +1,8 @@
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
+import { NavigateFunction } from 'react-router-dom';
+import { refresh } from './auth';
+import { RefreshParams } from './auth/types';
 
 export const siteURL = 'https://chosung-letter.com';
 // export const siteURL = 'http://localhost:3000';
@@ -9,46 +12,69 @@ const client = axios.create({
   baseURL,
 });
 
-function Logout() {
-  const navigate = useNavigate();
-  clearToken();
-  localStorage.clear();
-  navigate('/');
-}
+export const setupInterceptor = (navigate: NavigateFunction) => {
+  client.interceptors.response.use(
+    response => {
+      return response;
+    },
+    async error => {
+      const exception = error.response?.data?.exception;
+      console.log(exception);
+      // No Element
+      if (exception === 'java.util.NoSuchElementException') {
+        navigate('/notfound');
+      }
 
-client.interceptors.response.use(
-  response => {
-    return response;
-  },
-  async error => {
-    const exception = error.response?.data?.exception;
-    // 토큰이 없을 경우 재로그인
-    if (exception === 'java.lang.ClassCastException') {
-      Logout();
+      // Token Expired
+      if (exception === 'com.auth0.jwt.exceptions.TokenExpiredException') {
+        const previousRequest = error.config;
+        const date = new Date();
+        const accessToken = localStorage.getItem('accessToken');
+        const refreshToken = localStorage.getItem('refreshToken');
+        if (accessToken && refreshToken) {
+          const decodedRefreshToken: { exp: number } = jwtDecode(refreshToken);
+          const isExpired = decodedRefreshToken.exp * 1000 < date.getTime();
+          if (isExpired) {
+            console.log('refresh도 만료!');
+            // Refresh Token Expired
+            clearToken();
+            localStorage.clear();
+            navigate('/');
+          } else {
+            // Access Token Expired
+            if (previousRequest.headers === undefined) {
+              previousRequest.headers = {};
+            }
+            clearToken();
+            if (accessToken && refreshToken) {
+              refresh({ accessToken, refreshToken }).then(
+                ({ accessToken, refreshToken }: RefreshParams) => {
+                  applyToken(accessToken);
+                  localStorage.setItem('accessToken', accessToken);
+                  localStorage.setItem('refreshToken', refreshToken);
+                  previousRequest.headers.Authorization = `Bearer ${accessToken}`;
+                }
+              );
+            }
+          }
+        }
+        return axios(previousRequest);
+      }
+      // Need Token
+      if (exception === 'java.lang.ClassCastException') {
+        console.log('토큰 필요');
+        alert('토큰 없음');
+      }
+
+      // No Permission
+      if (
+        exception === 'com.project.csletter.member.exception.MemberException'
+      ) {
+        navigate('/nopermission');
+      }
     }
-
-    // (1) 만료된 문제면 -> 리프레시 시키고 재요청
-    // (3) 토큰 있는데 본인 아니면 -> 잘못된 접근입니다. 페이지 보내기
-    // if (error.response?.status === 500) {
-    //   clearToken();
-    //   const previousRequest = error.config;
-    //   const auth = await authStorage.get();
-    //   if (auth) {
-    //     await refresh(auth).then((value: AuthResult) => {
-    //       if (previousRequest.headers === undefined) {
-    //         previousRequest.headers = {};
-    //       }
-    //       dispatch(authorize(value.accessToken));
-    //       previousRequest.headers.Authorization = `Bearer ${value.accessToken}`;
-    //       authStorage.set(value);
-    //     });
-    //   }
-    //   return axios(previousRequest);
-    // } else {
-    // throw error;
-    // }
-  }
-);
+  );
+};
 
 export function applyToken(jwt: string) {
   client.defaults.headers.common.Authorization = `Bearer ${jwt}`;

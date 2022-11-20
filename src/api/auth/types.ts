@@ -12,3 +12,8 @@ export interface RefreshToken {
   exp: number;
   sub: string;
 }
+
+export interface RefreshParams {
+  accessToken: string;
+  refreshToken: string;
+}
