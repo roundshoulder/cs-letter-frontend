@@ -66,6 +66,8 @@ const color: { [key: string]: string } = {
   grey: '#bcbcbc',
   darkgrey: '#757575',
   white: '#fafafa',
+  error: '#ff5959',
+  correct: '#2cb1ff',
 };
 
 const fontWeight = {

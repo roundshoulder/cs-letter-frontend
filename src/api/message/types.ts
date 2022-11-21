@@ -17,24 +17,24 @@ export interface Message extends createMessageParams {
   isCorrect: boolean;
 }
 
-export interface getDetailMessageResult extends createMessageParams {
-  body: string;
+export interface getDetailMessageResult {
+  body: string[];
+  nickname: string;
+  toMemberToken: string;
   color: number;
   messageId: number;
-  nickname: string;
   time: string;
-  toMemberToken: string;
   markingResult: markingResult;
 }
 
 export interface markingParams {
-  body: string;
+  body: string[];
   messageId: number;
 }
 
 export interface markingResult {
-  body: string | null;
-  result: boolean[] | null;
+  body: string[] | null;
+  result: boolean[][] | null;
   isCorrect: boolean;
   count: number;
   totalCount: number;

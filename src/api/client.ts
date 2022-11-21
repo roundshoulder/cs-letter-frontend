@@ -30,7 +30,6 @@ export const setupInterceptor = (navigate: NavigateFunction) => {
     },
     async error => {
       const exception = error.response?.data?.exception;
-      console.log(exception);
       // No Element
       if (exception === 'java.util.NoSuchElementException') {
         navigate('/notfound');
