@@ -7,8 +7,7 @@ import Home from './pages/Home';
 import Read from './pages/Read';
 import User from './pages/User';
 import useAuthLoadEffect from './hooks/useAuthLoadEffect';
-import NotFound from './pages/NotFound';
-import NoPermission from './pages/NoPermission';
+import Alert from './pages/Alert';
 import { setupInterceptor } from './api/client';
 
 function App() {
@@ -25,8 +24,8 @@ function App() {
           <Route path="/create/:user" element={<Create />} />
           <Route path="/read/:no" element={<Read />} />
           <Route path="/oauth/callback/*" element={<KakaoRedirectHandler />} />
-          <Route path="/notfound" element={<NotFound />} />
-          <Route path="/nopermission" element={<NoPermission />} />
+          <Route path="/notfound" element={<Alert />} />
+          <Route path="/nopermission" element={<Alert />} />
         </Routes>
       </MainContainer>
     </QueryClientProvider>
