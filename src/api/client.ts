@@ -15,6 +15,17 @@ const client = axios.create({
 export const setupInterceptor = (navigate: NavigateFunction) => {
   client.interceptors.response.use(
     response => {
+      // const date = new Date();
+      // const accessToken = localStorage.getItem('accessToken');
+      // const refreshToken = localStorage.getItem('refreshToken');
+      // if (accessToken && refreshToken) {
+      //   const decodeAccess: { exp: number } = jwtDecode(accessToken);
+      //   const decodeRefresh: { exp: number } = jwtDecode(refreshToken);
+      //   console.log(decodeAccess.exp * 1000);
+      //   console.log(decodeRefresh.exp * 1000);
+      //   console.log(date.getTime());
+      //   console.log('***');
+      // }
       return response;
     },
     async error => {
@@ -34,36 +45,31 @@ export const setupInterceptor = (navigate: NavigateFunction) => {
         if (accessToken && refreshToken) {
           const decodedRefreshToken: { exp: number } = jwtDecode(refreshToken);
           const isExpired = decodedRefreshToken.exp * 1000 < date.getTime();
+          if (previousRequest.headers === undefined) {
+            previousRequest.headers = {};
+          }
+          clearToken();
           if (isExpired) {
-            console.log('refresh도 만료!');
             // Refresh Token Expired
-            clearToken();
             localStorage.clear();
-            navigate('/');
+            // navigate('/');
           } else {
             // Access Token Expired
-            if (previousRequest.headers === undefined) {
-              previousRequest.headers = {};
-            }
-            clearToken();
-            if (accessToken && refreshToken) {
-              refresh({ accessToken, refreshToken }).then(
-                ({ accessToken, refreshToken }: RefreshParams) => {
-                  applyToken(accessToken);
-                  localStorage.setItem('accessToken', accessToken);
-                  localStorage.setItem('refreshToken', refreshToken);
-                  previousRequest.headers.Authorization = `Bearer ${accessToken}`;
-                }
-              );
-            }
+            refresh({ accessToken, refreshToken }).then(
+              ({ accessToken, refreshToken }: RefreshParams) => {
+                applyToken(accessToken);
+                localStorage.setItem('accessToken', accessToken);
+                localStorage.setItem('refreshToken', refreshToken);
+                previousRequest.headers.Authorization = `Bearer ${accessToken}`;
+              }
+            );
           }
         }
         return axios(previousRequest);
       }
       // Need Token
       if (exception === 'java.lang.ClassCastException') {
-        console.log('토큰 필요');
-        alert('토큰 없음');
+        navigate('/nopermission');
       }
 
       // No Permission
