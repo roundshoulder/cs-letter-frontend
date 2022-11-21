@@ -37,7 +37,7 @@ const nicknameInput = css`
 const bodyTextArea = css`
   border: solid 2px ${Theme.color.black};
   border-radius: 15px;
-  min-height: 170px;
+  min-height: 180px;
   resize: none;
   background: none;
   ::-webkit-scrollbar {
@@ -103,7 +103,7 @@ function Create() {
       </div>
       <div className={row}>
         <div className={subtitle}>
-          <Tag text="원하는 색" />을 선택해주세요
+          <Tag text="닉네임 색상" />을 선택해주세요
         </div>
         <Palette form={form} setForm={setForm} />
       </div>
