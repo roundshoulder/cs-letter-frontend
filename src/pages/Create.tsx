@@ -96,7 +96,7 @@ function Create() {
         </div>
         <input
           className={nicknameInput}
-          placeholder="10자 이내로 작성해주세요 (영어, 한글만 사용가능)"
+          placeholder="10자 이내로 작성해주세요"
           onChange={e => {
             setForm({ ...form, nickname: e.target.value });
           }}
