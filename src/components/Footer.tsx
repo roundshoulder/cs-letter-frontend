@@ -12,6 +12,8 @@ function Footer() {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    align-items: ${isHome ? 'center' : 'flex-start'};
+    text-align: ${isHome ? 'center' : 'left'};
     gap: 10px;
     background-color: ${isHome ? '#0a0a0a' : '#f8f8f8'};
     color: ${fill};
