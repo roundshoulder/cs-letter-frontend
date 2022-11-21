@@ -8,6 +8,7 @@ import { getUser } from '../api/user';
 import { getUserResult } from '../api/user/type';
 import Theme from '../assets/Theme';
 import BottomButton from '../components/BottomButton';
+import CharacterCounter from '../components/CharacterCounter';
 import Palette from '../components/Palette';
 import Tag from '../components/Tag';
 import { ReplaceEmoji } from '../components/Validation';
@@ -34,7 +35,7 @@ const nicknameInput = css`
   border-bottom: solid 1px ${Theme.color.grey};
 `;
 const bodyTextArea = css`
-  border: solid 2px ${Theme.color.grey};
+  border: solid 2px ${Theme.color.black};
   border-radius: 15px;
   min-height: 170px;
   resize: none;
@@ -44,10 +45,6 @@ const bodyTextArea = css`
   }
   line-height: 36px;
   padding-top: 6px;
-`;
-
-const enableArea = css`
-  border: solid 2px ${Theme.color.black};
 `;
 
 function Create() {
@@ -116,8 +113,8 @@ function Create() {
           {name}
         </div>
         <textarea
-          className={`${bodyTextArea} ${enableArea}`}
-          placeholder="전하고 싶은 메세지를 입력해주세요. (이모티콘 제외)"
+          className={bodyTextArea}
+          placeholder="전하고 싶은 메세지를 입력해주세요.&#13;&#10;(이모티콘 제외)"
           value={form.body}
           onChange={e => {
             const replacedText = ReplaceEmoji(e.target.value);
@@ -126,6 +123,7 @@ function Create() {
           }}
           maxLength={100}
         />
+        <CharacterCounter count={form.body.length} />
         <textarea
           className={bodyTextArea}
           disabled={true}
