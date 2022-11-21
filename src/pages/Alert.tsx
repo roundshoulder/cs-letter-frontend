@@ -15,6 +15,7 @@ const container = css`
 const title = css`
   font-weight: ${Theme.fontWeight.bold};
   font-size: 18px;
+  margin-top: 10px;
 `;
 
 function Alert() {
