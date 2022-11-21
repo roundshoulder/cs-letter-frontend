@@ -62,24 +62,33 @@ code {
 
 input {
   padding: 0px 0px 10px 0px;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: SUIT, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }:focus{
   outline: none; 
 }::placeholder{
+  font-weight: 400;
   color: #bcbcbc;
 }
 
 textarea {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: SUIT, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding: 15px;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 600;
 }:focus{
   outline: none;
 }::placeholder{
+  font-weight: 400;
   color: #bcbcbc
 }
 /* 일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십 */
