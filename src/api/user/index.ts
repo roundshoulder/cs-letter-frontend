@@ -1,8 +1,12 @@
 import client from '../client';
 import { getUserResult } from './type';
 
-// 로그인
 export async function getUser(memberToken: string) {
   const response = await client.get<getUserResult>(`/member/${memberToken}`);
+  return response.data;
+}
+
+export async function getUserName(memberToken: string) {
+  const response = await client.get<string>(`/member/name/${memberToken}`);
   return response.data;
 }
