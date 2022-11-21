@@ -76,7 +76,7 @@ const tail = css`
   border-radius: 3px;
 `;
 
-function ReadCounter({ count }: { count: number }) {
+function ReadCounter({ count, color }: { count: number; color: number }) {
   const [isInfoVisible, setIsInfoVisible] = useState<boolean>(false);
   const bubbleContainer = css`
     position: relative;
@@ -97,7 +97,11 @@ function ReadCounter({ count }: { count: number }) {
       </div>
       <div className={textContainer}>
         <div>
-          오늘 남은 횟수 <span style={{ color: 'red' }}>{5 - count}</span>/5
+          오늘 남은 횟수{' '}
+          <span style={{ color: Theme.color[Object.keys(Theme.color)[color]] }}>
+            {5 - count}
+          </span>
+          /5
         </div>
         <button className={infoButton} onClick={alert}>
           <div className={infoButtonBackground} />
