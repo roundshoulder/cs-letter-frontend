@@ -46,7 +46,9 @@ function Header() {
   const location = useLocation();
   const navigate = useNavigate();
   const isLoginUser = !!localStorage.getItem('refreshToken');
-  const isUserPage = location.pathname.split('/')[1] === 'u';
+  const pathName = location.pathname.split('/')[1];
+  const isUserPage = pathName === 'u';
+  const isAlertPage = pathName === 'nopermission' || pathName === 'notfound';
   function Logout() {
     clearToken();
     localStorage.clear();
@@ -56,7 +58,10 @@ function Header() {
     <div className={headerContainer}>
       <div className={iconContainer} style={{ justifyContent: 'flex-start' }}>
         {!isUserPage && (
-          <button onClick={() => navigate(-1)} className={iconButton}>
+          <button
+            onClick={isAlertPage ? () => navigate('/') : () => navigate(-1)}
+            className={iconButton}
+          >
             <MdOutlineArrowBackIos size={18} />
           </button>
         )}
