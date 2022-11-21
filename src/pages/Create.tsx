@@ -4,8 +4,7 @@ import { useMutation, useQuery } from 'react-query';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { createMessage } from '../api/message';
 import { createMessageParams } from '../api/message/types';
-import { getUser } from '../api/user';
-import { getUserResult } from '../api/user/type';
+import { getUserName } from '../api/user';
 import Theme from '../assets/Theme';
 import BottomButton from '../components/BottomButton';
 import CharacterCounter from '../components/CharacterCounter';
@@ -56,12 +55,12 @@ function Create() {
     body: '',
     nickname: '',
     toMemberToken: memberToken,
-    color: 0,
+    color: 10,
   });
 
-  useQuery('getUser', () => getUser(memberToken), {
-    onSuccess: (data: getUserResult) => {
-      setName(data.kakaoNickname);
+  useQuery('getUser', () => getUserName(memberToken), {
+    onSuccess: (data: string) => {
+      setName(data);
     },
   });
 
@@ -103,7 +102,7 @@ function Create() {
       </div>
       <div className={row}>
         <div className={subtitle}>
-          <Tag text="닉네임 색상" />을 선택해주세요
+          <Tag text="닉네임 색상" color={form.color} />을 선택해주세요
         </div>
         <Palette form={form} setForm={setForm} />
       </div>
@@ -133,7 +132,7 @@ function Create() {
       </div>
       <BottomButton
         enable={
-          !!form.body && !!form.nickname && (!!form.color || form.color === 0)
+          !!form.body && !!form.nickname && (!!form.color || form.color === 10)
         }
         onClick={() => mutate(form)}
       >
