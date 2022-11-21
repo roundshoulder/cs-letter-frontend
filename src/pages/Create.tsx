@@ -131,9 +131,7 @@ function Create() {
         />
       </div>
       <BottomButton
-        enable={
-          !!form.body && !!form.nickname && (!!form.color || form.color === 10)
-        }
+        enable={!!form.body && !!form.nickname && form.color !== 10}
         onClick={() => mutate(form)}
       >
         작성 완료

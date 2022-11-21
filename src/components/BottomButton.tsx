@@ -29,7 +29,9 @@ function BottomButton({
     justify-content: center;
     font-weight: ${Theme.fontWeight.semibold};
     color: ${Theme.color.white};
-    background-color: ${enable ? Theme.color.black : Theme.color.grey};
+    background-color: ${isCorrect || enable
+      ? Theme.color.black
+      : Theme.color.grey};
   `;
 
   return (
