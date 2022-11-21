@@ -10,6 +10,7 @@ import Theme from '../assets/Theme';
 import BottomButton from '../components/BottomButton';
 import Palette from '../components/Palette';
 import Tag from '../components/Tag';
+import { ReplaceEmoji } from '../components/Validation';
 
 const container = css`
   display: flex;
@@ -116,17 +117,19 @@ function Create() {
         </div>
         <textarea
           className={`${bodyTextArea} ${enableArea}`}
-          placeholder="전하고 싶은 메세지를 입력해주세요."
+          placeholder="전하고 싶은 메세지를 입력해주세요. (이모티콘 제외)"
+          value={form.body}
           onChange={e => {
-            setForm({ ...form, body: e.target.value });
-            toInitial(e.target.value);
+            const replacedText = ReplaceEmoji(e.target.value);
+            setForm({ ...form, body: replacedText });
+            toInitial(replacedText);
           }}
           maxLength={100}
         />
         <textarea
           className={bodyTextArea}
           disabled={true}
-          placeholder="상대방에게는 이렇게 보여요!"
+          placeholder="위의 내용이 상대방에게는 이런 초성으로 보여요!"
           value={initial}
         />
       </div>
