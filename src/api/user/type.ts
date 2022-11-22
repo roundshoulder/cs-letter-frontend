@@ -4,5 +4,9 @@ export interface getUserResult {
   kakaoProfileImg: string;
   memberToken: string;
   userCode: number;
-  // userRole: 'USER';
+  notRead: number;
+  solving: number;
+  correctMessage: number;
+  countMessage: number;
+  userRole: 'USER';
 }

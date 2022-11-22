@@ -1,10 +1,6 @@
 import logo from '../assets/logo.svg';
 import { css } from '@emotion/css';
-import {
-  MdOutlineArrowBackIos,
-  MdLogout,
-  MdPermIdentity,
-} from 'react-icons/md';
+import { MdOutlineArrowBackIos } from 'react-icons/md';
 import Theme, { PADDING } from '../assets/Theme';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { clearToken } from '../api/client';
@@ -18,20 +14,22 @@ const headerContainer = css`
   justify-content: space-between;
   align-items: center;
   z-index: 10;
+  padding: 0px ${PADDING}px;
 `;
 
-const iconContainer = css`
-  width: 70px;
-  padding: 0px ${PADDING}px 0px ${PADDING}px;
+const buttonContainer = css`
+  width: calc((100%-70px) / 2);
   display: flex;
-  gap: 10px;
   align-items: center;
+  gap: 10px;
 `;
 
-const iconButton = css`
+const button = css`
   border: none;
   background: none;
   color: ${Theme.color.white};
+  font-size: 11px;
+  padding: 0px;
 `;
 
 const logoButton = css`
@@ -56,11 +54,11 @@ function Header() {
   }
   return (
     <div className={headerContainer}>
-      <div className={iconContainer} style={{ justifyContent: 'flex-start' }}>
+      <div className={buttonContainer} style={{ justifyContent: 'flex-start' }}>
         {!isUserPage && (
           <button
             onClick={isAlertPage ? () => navigate('/') : () => navigate(-1)}
-            className={iconButton}
+            className={button}
           >
             <MdOutlineArrowBackIos size={18} />
           </button>
@@ -69,27 +67,34 @@ function Header() {
       <button onClick={() => navigate('/')} className={logoButton}>
         <img src={logo} alt="chosung letter logo" width={70} />
       </button>
-      <div className={iconContainer} style={{ justifyContent: 'flex-end' }}>
+      <div className={buttonContainer} style={{ justifyContent: 'flex-end' }}>
         {isUserPage && (
           <>
             {isLoginUser ? (
               <>
-                <button onClick={() => Logout()} className={iconButton}>
-                  <MdLogout size={20} />
+                <button onClick={() => Logout()} className={button}>
+                  로그아웃
                 </button>
+                |
                 <button
-                  onClick={() =>
-                    navigate(`/u/${localStorage.getItem('memberToken')}`)
-                  }
-                  className={iconButton}
+                  className={button}
+                  onClick={() => {
+                    navigate(`/u/${localStorage.getItem('memberToken')}`);
+                  }}
                 >
-                  <MdPermIdentity size={20} />
+                  내 편지함
                 </button>
               </>
             ) : (
-              <a href={KAKAO_AUTH_URL} style={{ padding: '1px 6px' }}>
-                <MdPermIdentity size={20} color={Theme.color.white} />
-              </a>
+              <>
+                <a href={KAKAO_AUTH_URL} className={button}>
+                  로그인
+                </a>
+                |
+                <a href={KAKAO_AUTH_URL} className={button}>
+                  내 편지함
+                </a>
+              </>
             )}
           </>
         )}

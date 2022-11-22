@@ -85,14 +85,14 @@ function User() {
   const [copy, setCopy] = useState<boolean>(false);
   const url = window.location.href;
 
-  useQuery('getUser', () => getUser(memberToken), {
+  useQuery(['getUser', memberToken], () => getUser(memberToken), {
     onSuccess: (data: getUserResult) => {
       setUser(data);
     },
   });
 
   useQuery(
-    ['getMessage', { cursor }],
+    ['getMessage', cursor, memberToken],
     () =>
       getMessage(
         cursor !== 0 && !!messages
