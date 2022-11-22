@@ -30,6 +30,8 @@ function Read() {
       if (data.markingResult.body) {
         setAnswer(data.markingResult.body);
         setIsEditable(false);
+      } else {
+        setAnswer(Array(data.body.length).fill(''));
       }
     },
     refetchOnWindowFocus: false,
@@ -53,9 +55,6 @@ function Read() {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    /* max-width: 100%; */
-    /* min-height: 320px; */
-    /* background-color: red; */
     position: relative;
     border: solid 1.5px
       ${data?.markingResult.isCorrect

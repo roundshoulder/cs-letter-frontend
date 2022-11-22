@@ -23,6 +23,7 @@ const button = css`
   background: none;
   border: none;
   padding: 0px;
+  width: 100%;
 `;
 
 const input = css`
