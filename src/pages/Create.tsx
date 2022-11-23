@@ -76,7 +76,7 @@ function Create() {
     },
   });
 
-  const { mutate } = useMutation(createMessage, {
+  const { mutate, isLoading } = useMutation(createMessage, {
     onSuccess: () => {
       navigate(`/u/${memberToken}`);
     },
@@ -152,7 +152,9 @@ function Create() {
         </div>
       </div>
       <BottomButton
-        enable={!!form.body && !!form.nickname && form.color !== 10}
+        enable={
+          !!form.body && !!form.nickname && form.color !== 10 && !isLoading
+        }
         onClick={() => mutate(form)}
       >
         작성 완료
