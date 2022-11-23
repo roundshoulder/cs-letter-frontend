@@ -72,7 +72,7 @@ input {
   padding: 0px 0px 10px 0px;
   font-size: 16px;
   font-weight: 600;
-  font-variant-ligatures: no-common-ligatures;
+  font-variant-ligatures: none;
 }:focus{
   outline: none; 
 }::placeholder{
@@ -84,7 +84,7 @@ textarea {
   padding: 15px;
   font-size: 16px;
   font-weight: 600;
-  font-variant-ligatures: no-common-ligatures;
+  font-variant-ligatures: none;
 }:focus{
   outline: none;
 }::placeholder{
