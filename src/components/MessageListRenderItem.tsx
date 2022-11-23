@@ -40,15 +40,18 @@ function MessageListRenderItem({ message, isMe }: Params) {
       <div>{children}</div>
     );
   }
-  const Month = parseInt(time.substring(5, 7), 10);
-  const Day = parseInt(time.substring(8, 10), 10);
-  const Hour = parseInt(time.substring(11, 13), 10);
-  const Minute = parseInt(time.substring(14, 16), 10);
-  const Second = parseInt(time.substring(17, 19), 10);
-  const nowDay = new Date().getDate();
-  const nowHour = new Date().getHours();
-  const nowMinute = new Date().getMinutes();
-  const nowSecond = new Date().getSeconds();
+  const [year, month, date, hour, minute, second] = time
+    .split('/')
+    .map(v => parseInt(v, 10));
+  const now = new Date();
+  const nowYear = now.getFullYear();
+  const nowMonth = now.getMonth() + 1;
+  const nowDate = now.getDate();
+  const nowHour = now.getHours();
+  const nowMinute = now.getMinutes();
+  const nowSecond = now.getSeconds();
+  console.log(year, month, date, hour, minute, second);
+  console.log(nowYear, nowMonth, nowDate, nowHour, nowMinute, nowSecond);
   return (
     <Container>
       <div className={box}>
@@ -66,17 +69,7 @@ function MessageListRenderItem({ message, isMe }: Params) {
                   : Theme.color.grey
               }
             />
-            <div style={{ color: Theme.color.grey, marginLeft: '5px' }}>
-              {nowDay - Day !== 0
-                ? `${Month}월 ${Day}일`
-                : nowHour - Hour !== 0
-                ? `${Math.abs(nowHour - Hour)}시간 전`
-                : nowMinute - Minute !== 0
-                ? `${Math.abs(nowMinute - Minute)}분 전`
-                : nowSecond - Second !== 0
-                ? '방금 전'
-                : ''}
-            </div>
+            <div style={{ color: Theme.color.grey, marginLeft: '5px' }}></div>
           </div>
         </div>
         <div style={{ position: 'relative' }}>

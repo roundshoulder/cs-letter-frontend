@@ -14,6 +14,7 @@ import { getMessage } from '../api/message';
 import { Message } from '../api/message/types';
 import PageNavButton from '../components/PageNavButton';
 import CopyToClipboard from 'react-copy-to-clipboard';
+import Ad from '../components/Ad';
 
 const profile = css`
   position: relative;
@@ -148,6 +149,7 @@ function User() {
               </Link>
             )}
           </div>
+          <Ad />
           <div className={nav}>
             <Tag text="From." />
             <div className={arrowButtonContainer}>
