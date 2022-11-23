@@ -19,7 +19,7 @@ function Tag({ color = 10, text, type = 'default', isSquare = false }: Props) {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: fit-content;
+    min-width: fit-content;
     padding: ${typeStyle[type].padding};
     height: ${typeStyle[type].height};
     border-radius: ${isSquare ? '0px' : '100px'};
