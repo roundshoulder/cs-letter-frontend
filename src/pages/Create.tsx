@@ -37,6 +37,7 @@ const subtitle = css`
 `;
 const nicknameInput = css`
   border: none;
+  border-radius: 0px;
   border-bottom: solid 1px ${Theme.color.grey};
 `;
 const textAreaContainer = css`
@@ -111,6 +112,7 @@ function Create() {
             setForm({ ...form, nickname: e.target.value.slice(0, 10) });
           }}
           maxLength={10}
+          spellCheck={false}
         />
       </div>
       <div className={row}>
@@ -136,6 +138,7 @@ function Create() {
               toInitial(replacedText);
             }}
             maxLength={100}
+            spellCheck={false}
           />
           <CharacterCounter count={form.body.length} />
         </div>
