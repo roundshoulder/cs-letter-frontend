@@ -8,6 +8,7 @@
       url('https://cdn.jsdelivr.net/gh/webfontworld/sunn/SUIT-Regular.woff') format('woff'),
       url('https://cdn.jsdelivr.net/gh/webfontworld/sunn/SUIT-Regular.ttf') format("truetype");
   font-display: swap;
+  font-feature-settings: "liga" 0;
 }
 @font-face {
   font-family: 'SUIT';
@@ -19,6 +20,7 @@
       url('https://cdn.jsdelivr.net/gh/webfontworld/sunn/SUIT-Medium.woff') format('woff'),
       url('https://cdn.jsdelivr.net/gh/webfontworld/sunn/SUIT-Medium.ttf') format("truetype");
   font-display: swap;
+  font-feature-settings: "liga" 0;
 }
 @font-face {
   font-family: 'SUIT';
@@ -30,6 +32,7 @@
       url('https://cdn.jsdelivr.net/gh/webfontworld/sunn/SUIT-SemiBold.woff') format('woff'),
       url('https://cdn.jsdelivr.net/gh/webfontworld/sunn/SUIT-SemiBold.ttf') format("truetype");
   font-display: swap;
+  font-feature-settings: "liga" 0;
 }
 @font-face {
   font-family: 'SUIT';
@@ -41,10 +44,13 @@
       url('https://cdn.jsdelivr.net/gh/webfontworld/sunn/SUIT-Bold.woff') format('woff'),
       url('https://cdn.jsdelivr.net/gh/webfontworld/sunn/SUIT-Bold.ttf') format("truetype");
   font-display: swap;
+  font-feature-settings: "liga" 0;
 }
 
 * {
   font-feature-settings: "liga" 0;
+  -webkit-font-feature-settings: "liga" 0;
+  -moz-font-feature-settings: "liga" 0;
 }
 
 html, body {
