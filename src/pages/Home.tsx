@@ -26,12 +26,12 @@ function Home() {
     <>
       <div className={container}>
         <Tag text="ㅊㅅㅍㅈ" color={9} type={'mobileHome'} />
-        <Tag text="!" color={5} type={'mobileHome'} isSquare={true} />
-        <Tag text="From." color={8} type={'mobileHome'} />
-        <Tag text="?" color={2} type={'mobileHome'} isSquare={true} />
-        <Tag text="Secret" color={0} type={'mobileHome'} />
-        <Tag text="Message" color={4} type={'mobileHome'} />
-        <Tag text="ㅊㅅㅍㅈ" color={6} type={'mobileHome'} />
+        <Tag text="!" color={6} type={'mobileHome'} isSquare={true} />
+        <Tag text="From." color={0} type={'mobileHome'} />
+        <Tag text="?" color={4} type={'mobileHome'} isSquare={true} />
+        <Tag text="Secret" color={2} type={'mobileHome'} />
+        <Tag text="Message" color={5} type={'mobileHome'} />
+        <Tag text="ㅊㅅㅍㅈ" color={1} type={'mobileHome'} />
         <Tag text="To." color={11} type={'mobileHome'} />
         <Tag text="!" color={7} type={'mobileHome'} isSquare={true} />
       </div>

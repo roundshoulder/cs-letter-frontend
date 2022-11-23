@@ -1,30 +1,46 @@
 import { css } from '@emotion/css';
+import pattern1 from '../assets/pattern1.png';
+import pattern2 from '../assets/pattern2.png';
 
 const tagStyle: { [key: number]: string } = {
   0: css`
+    background-color: #ffc3c3;
+    background-image: url(${pattern1});
+    background-position: center;
+    background-size: cover;
+    color: #1f1b1b;
+  `,
+  1: css`
+    background-color: #b6e9ff;
+    background-image: url(${pattern2});
+    background-position: center;
+    background-size: cover;
+    color: #21282c;
+  `,
+  2: css`
     background-color: #ff8c8c;
     color: #6b2929;
   `,
-  1: css`
+  3: css`
     background-color: #ffb864;
     color: #50381c;
   `,
-  2: css`
+  4: css`
     background-color: #ffe665;
     color: #534b23;
   `,
-  3: css`
-    background-color: #c6ff69;
-    color: #384b1a;
-  `,
-  4: css`
+  // 3: css`
+  //   background-color: #c6ff69;
+  //   color: #384b1a;
+  // `,
+  5: css`
     background-color: #4eda91;
     color: #1d3c2e;
   `,
-  5: css`
-    background-color: #abfff0;
-    color: #244943;
-  `,
+  // 5: css`
+  //   background-color: #abfff0;
+  //   color: #244943;
+  // `,
   6: css`
     background-color: #65c6ff;
     color: #1c3b4d;
@@ -52,12 +68,14 @@ const tagStyle: { [key: number]: string } = {
   `,
 };
 const color: { [key: string]: string } = {
+  pattern1: '#ffc3c3',
+  pattern2: '#b6e9ff',
   red: '#ff8c8c',
   orange: '#ffb864',
   yellow: '#ffe665',
-  lightGreen: '#c6ff69',
+  // lightGreen: '#c6ff69',
   green: '#4eda91',
-  lightBlue: '#abfff0',
+  // lightBlue: '#abfff0',
   blue: '#65c6ff',
   lightPurple: '#e1b1ff',
   pink: '#ff95ee',
