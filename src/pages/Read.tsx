@@ -42,6 +42,7 @@ function Read() {
       if (data) {
         setData({ ...data, markingResult: markingResult });
       }
+      setIsEditable(false);
     },
   });
 
@@ -89,7 +90,7 @@ function Read() {
             {data.body.map((v, i) => (
               <Row
                 key={i}
-                isEditable={isLoading || isEditable}
+                isEditable={isEditable}
                 problem={v}
                 solution={answer[i]}
                 result={
@@ -118,7 +119,6 @@ function Read() {
             isCorrect={data.markingResult.isCorrect && true}
             onClick={() => {
               mutate({ body: answer, messageId: data.messageId });
-              setIsEditable(false);
             }}
           >
             {data.markingResult.isCorrect
