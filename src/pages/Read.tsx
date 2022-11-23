@@ -100,7 +100,9 @@ function Read() {
                   newAnswer[i] = e.target.value.slice(0, v.length);
                   setAnswer(newAnswer);
                 }}
-                setIsEditable={() => setIsEditable(true)}
+                setIsEditable={() => {
+                  !data.markingResult.isCorrect && setIsEditable(true);
+                }}
               />
             ))}
             {data.markingResult.isCorrect && (

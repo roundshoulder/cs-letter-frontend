@@ -18,6 +18,7 @@ const container = css`
 const row = css`
   display: flex;
   flex-direction: row;
+  min-height: 20px;
 `;
 const button = css`
   background: none;
