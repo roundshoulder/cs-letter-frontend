@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import Theme from '../assets/Theme';
 import MessageListRenderItem from '../components/MessageListRenderItem';
 import Tag from '../components/Tag';
-import { MdOutlineCreate, MdDownloadDone } from 'react-icons/md';
+import { MdOutlineCreate, MdDownloadDone, MdVerified } from 'react-icons/md';
 import { useState } from 'react';
 import BottomButton from '../components/BottomButton';
 import KakaoButton from '../components/KakaoButton';
@@ -30,7 +30,7 @@ const nav = css`
   flex-direction: row;
   justify-content: space-between;
   padding: 15px 0px 15px 0px;
-  border-bottom: solid 1px #0a0a0a;
+  /* border-bottom: solid 1px #0a0a0a; */
 `;
 
 const arrowButtonContainer = css`
@@ -75,6 +75,21 @@ const intro = css`
   font-weight: ${Theme.fontWeight.semibold};
   text-align: center;
   margin: 55px 0px 15px 0px;
+`;
+
+const staticContainer = css`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  padding-bottom: 10px;
+  border-bottom: solid 1px #0a0a0a;
+`;
+
+const staticItem = css`
+  display: flex;
+  align-items: center;
+  gap: 5px;
 `;
 
 function User() {
@@ -151,6 +166,29 @@ function User() {
                 direction="foward"
                 enable={!!messages[messages.length - 1]?.haveNextMessage}
               />
+            </div>
+          </div>
+          <div className={staticContainer}>
+            <div className={staticItem}>
+              읽지 않음
+              <span style={{ fontWeight: Theme.fontWeight.bold }}>
+                {user.notRead}
+              </span>
+              <MdVerified size={18} color={Theme.color.grey} />
+            </div>
+            <div className={staticItem}>
+              푸는 중
+              <span style={{ fontWeight: Theme.fontWeight.bold }}>
+                {user.solving}
+              </span>
+              <MdVerified size={18} color={Theme.color.error} />
+            </div>
+            <div className={staticItem}>
+              완성
+              <span style={{ fontWeight: Theme.fontWeight.bold }}>
+                {user.correctMessage}
+              </span>
+              <MdVerified size={18} color={Theme.color.black} />
             </div>
           </div>
           {messages.map(message => (
