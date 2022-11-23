@@ -3,7 +3,12 @@ import { Link, useLocation } from 'react-router-dom';
 import Theme from '../assets/Theme';
 import MessageListRenderItem from '../components/MessageListRenderItem';
 import Tag from '../components/Tag';
-import { MdOutlineCreate, MdDownloadDone, MdVerified } from 'react-icons/md';
+import {
+  MdOutlineCreate,
+  MdDownloadDone,
+  MdVerified,
+  MdMailOutline,
+} from 'react-icons/md';
 import { useState } from 'react';
 import BottomButton from '../components/BottomButton';
 import KakaoButton from '../components/KakaoButton';
@@ -30,16 +35,16 @@ const nav = css`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: ${Theme.fontWeight.bold};
   padding: 15px 0px 15px 0px;
-  /* border-bottom: solid 1px #0a0a0a; */
 `;
 
 const arrowButtonContainer = css`
   display: flex;
   flex-direction: row;
   align-items: center;
-  font-size: 18px;
-  font-weight: ${Theme.fontWeight.bold};
   gap: 13px;
 `;
 
@@ -151,7 +156,14 @@ function User() {
           </div>
           <Ad />
           <div className={nav}>
-            <Tag text="From." />
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <Tag text="From." />
+              <MdMailOutline
+                size={20}
+                style={{ marginLeft: '14px', marginRight: '8px' }}
+              />
+              {user.countMessage}
+            </div>
             <div className={arrowButtonContainer}>
               <PageNavButton
                 onClick={() => {
