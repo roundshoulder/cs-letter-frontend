@@ -18,7 +18,7 @@ const headerContainer = css`
 `;
 
 const buttonContainer = css`
-  width: calc((100%-70px) / 2);
+  min-width: calc((100%-70px) / 2);
   display: flex;
   align-items: center;
   gap: 10px;
