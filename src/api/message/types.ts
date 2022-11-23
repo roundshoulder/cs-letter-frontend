@@ -15,6 +15,7 @@ export interface Message extends createMessageParams {
   haveNextMessage: boolean;
   time: string;
   isCorrect: boolean;
+  isRead: boolean;
 }
 
 export interface getDetailMessageResult {

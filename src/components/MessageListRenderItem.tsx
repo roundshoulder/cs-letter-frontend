@@ -16,12 +16,13 @@ const header = css`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: flex-start;
 `;
 const status = css`
   display: flex;
   font-size: 11px;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   gap: 3px;
 `;
 
@@ -31,7 +32,7 @@ interface Params {
 }
 
 function MessageListRenderItem({ message, isMe }: Params) {
-  const { body, color, messageId, nickname, time, isCorrect } = message;
+  const { body, color, messageId, nickname, time, isCorrect, isRead } = message;
   function Container({ children }: { children: ReactNode }) {
     return isMe ? (
       <Link to={`/read/${messageId}`}>{children}</Link>
@@ -54,13 +55,17 @@ function MessageListRenderItem({ message, isMe }: Params) {
         <div className={header}>
           <Tag color={color} text={nickname} />
           <div className={status}>
-            <div
-              className={status}
-              style={isCorrect ? undefined : { color: Theme.color.grey }}
-            >
-              <span>{isCorrect ? '완성' : '미완성'}</span>
-              <MdVerified size={18} />
-            </div>
+            <span>{isCorrect ? '완성' : isRead ? '푸는 중' : '읽지 않음'}</span>
+            <MdVerified
+              size={18}
+              color={
+                isCorrect
+                  ? Theme.color.black
+                  : isRead
+                  ? Theme.color.error
+                  : Theme.color.grey
+              }
+            />
             <div style={{ color: Theme.color.grey, marginLeft: '5px' }}>
               {nowDay - Day !== 0
                 ? `${Month}월 ${Day}일`
