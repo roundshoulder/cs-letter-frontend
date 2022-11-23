@@ -22,28 +22,40 @@ const row = css`
   flex-direction: column;
   gap: 10px;
 `;
-const subtitle = css`
+const title = css`
   display: flex;
   align-items: center;
   font-weight: ${Theme.fontWeight.semibold};
   gap: 5px;
   margin-bottom: 5px;
+  font-size: 16px;
+`;
+const subtitle = css`
+  font-weight: ${Theme.fontWeight.semibold};
+  font-size: 16px;
+  padding-left: 12px;
 `;
 const nicknameInput = css`
   border: none;
   border-bottom: solid 1px ${Theme.color.grey};
 `;
-const bodyTextArea = css`
+const textAreaContainer = css`
+  padding: 6px 15px 15px 15px;
   border: solid 2px ${Theme.color.black};
   border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+`;
+const textArea = css`
   min-height: 180px;
+  border: none;
+  padding: 0px;
   resize: none;
+  line-height: 36px;
   background: none;
   ::-webkit-scrollbar {
     display: none;
   }
-  line-height: 36px;
-  padding-top: 6px;
 `;
 
 function Create() {
@@ -88,7 +100,7 @@ function Create() {
   return (
     <div className={container}>
       <div className={row}>
-        <div className={subtitle}>
+        <div className={title}>
           <Tag text="닉네임" />을 입력해주세요
         </div>
         <input
@@ -102,34 +114,42 @@ function Create() {
         />
       </div>
       <div className={row}>
-        <div className={subtitle}>
+        <div className={title}>
           <Tag text="닉네임 색상" color={form.color} />을 선택해주세요
         </div>
         <Palette form={form} setForm={setForm} />
       </div>
       <div className={row}>
-        <div className={subtitle}>
+        <div className={title}>
           <Tag text="To." />
           {name}
         </div>
-        <textarea
-          className={bodyTextArea}
-          placeholder="전하고 싶은 메세지를 입력해주세요.&#13;&#10;(이모티콘 제외)"
-          value={form.body}
-          onChange={e => {
-            const replacedText = ReplaceEmoji(e.target.value.slice(0, 100));
-            setForm({ ...form, body: replacedText });
-            toInitial(replacedText);
-          }}
-          maxLength={100}
-        />
-        <CharacterCounter count={form.body.length} />
-        <textarea
-          className={bodyTextArea}
-          disabled={true}
-          placeholder="위의 내용이 상대방에게는 이런 초성으로 보여요!"
-          value={initial}
-        />
+        <div className={subtitle}>전하고 싶은 메세지를 입력해주세요</div>
+        <div className={textAreaContainer}>
+          <textarea
+            className={textArea}
+            placeholder="안녕하세요 라운드숄더입니다 (이모티콘 제외)"
+            value={form.body}
+            onChange={e => {
+              const replacedText = ReplaceEmoji(e.target.value.slice(0, 100));
+              setForm({ ...form, body: replacedText });
+              toInitial(replacedText);
+            }}
+            maxLength={100}
+          />
+          <CharacterCounter count={form.body.length} />
+        </div>
+        <div className={subtitle} style={{ marginTop: '6px' }}>
+          상대방에게는 이렇게 보여요
+        </div>
+        <div className={textAreaContainer}>
+          <textarea
+            className={textArea}
+            disabled={true}
+            placeholder="ㅇㄴㅎㅅㅇ ㄹㅇㄷㅅㄷㅇㄴㄷ (이모티콘 제외)"
+            value={initial}
+          />
+        </div>
       </div>
       <BottomButton
         enable={!!form.body && !!form.nickname && form.color !== 10}

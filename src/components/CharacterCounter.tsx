@@ -4,6 +4,7 @@ import Theme from '../assets/Theme';
 const counter = css`
   font-weight: ${Theme.fontWeight.semibold};
   font-size: 11px;
+  align-self: flex-end;
   color: ${Theme.color.grey};
 `;
 

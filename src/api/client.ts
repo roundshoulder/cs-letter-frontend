@@ -55,6 +55,8 @@ export const setupInterceptor = (navigate: NavigateFunction) => {
           } else {
             // Access Token Expired
             refresh({ accessToken, refreshToken }).then(
+              // 에러처리 필요 refreshToken 만료
+              // com.project.csletter.member.exception.MemberException
               ({ accessToken, refreshToken }: RefreshParams) => {
                 applyToken(accessToken);
                 localStorage.setItem('accessToken', accessToken);
