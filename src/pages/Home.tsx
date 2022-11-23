@@ -51,6 +51,7 @@ const mypage = css`
   height: 47px;
   border-radius: 47px;
   border: none;
+  color: ${Theme.color.black};
   font-weight: ${Theme.fontWeight.bold};
 `;
 
@@ -58,19 +59,21 @@ function Home() {
   const memberToken = localStorage.getItem('memberToken');
   const navigate = useNavigate();
   const prevScrollY = useRef(0);
-  const [goingUp, setGoingUp] = useState(false);
+  const [goingUp, setGoingUp] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       if (prevScrollY.current < currentScrollY && goingUp) {
         setGoingUp(false);
+        console.log('down');
         window.scrollTo({
           top: document.body.scrollHeight,
           behavior: 'smooth',
         });
       }
       if (prevScrollY.current > currentScrollY && !goingUp) {
+        console.log('up');
         setGoingUp(true);
       }
       prevScrollY.current = currentScrollY;
