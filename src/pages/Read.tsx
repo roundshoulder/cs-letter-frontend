@@ -97,7 +97,7 @@ function Read() {
                 }
                 onChange={e => {
                   const newAnswer = [...answer];
-                  newAnswer[i] = e.target.value;
+                  newAnswer[i] = e.target.value.slice(0, v.length);
                   setAnswer(newAnswer);
                 }}
                 setIsEditable={() => setIsEditable(true)}

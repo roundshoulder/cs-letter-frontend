@@ -94,8 +94,9 @@ function Create() {
         <input
           className={nicknameInput}
           placeholder="10자 이내로 작성해주세요"
+          value={form.nickname}
           onChange={e => {
-            setForm({ ...form, nickname: e.target.value });
+            setForm({ ...form, nickname: e.target.value.slice(0, 10) });
           }}
           maxLength={10}
         />
@@ -116,7 +117,7 @@ function Create() {
           placeholder="전하고 싶은 메세지를 입력해주세요.&#13;&#10;(이모티콘 제외)"
           value={form.body}
           onChange={e => {
-            const replacedText = ReplaceEmoji(e.target.value);
+            const replacedText = ReplaceEmoji(e.target.value.slice(0, 100));
             setForm({ ...form, body: replacedText });
             toInitial(replacedText);
           }}
