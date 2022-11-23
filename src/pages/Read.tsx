@@ -89,7 +89,7 @@ function Read() {
             {data.body.map((v, i) => (
               <Row
                 key={i}
-                isEditable={isEditable}
+                isEditable={isLoading || isEditable}
                 problem={v}
                 solution={answer[i]}
                 result={
