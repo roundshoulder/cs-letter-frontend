@@ -8,6 +8,8 @@ import {
   MdDownloadDone,
   MdVerified,
   MdMailOutline,
+  MdNotificationsNone,
+  MdOutlineEast,
 } from 'react-icons/md';
 import { useState } from 'react';
 import BottomButton from '../components/BottomButton';
@@ -20,6 +22,23 @@ import { Message } from '../api/message/types';
 import PageNavButton from '../components/PageNavButton';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import Ad from '../components/Ad';
+
+const notice = css`
+  display: flex;
+  padding: 0px 18px;
+  margin-bottom: 20px;
+  justify-content: space-between;
+  align-items: center;
+  border: solid 1px ${Theme.color.grey};
+  font-size: 11px;
+  height: 25px;
+  border-radius: 25px;
+`;
+const noticeContents = css`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+`;
 
 const profile = css`
   position: relative;
@@ -130,6 +149,17 @@ function User() {
     <>
       {user && messages && (
         <>
+          <a
+            href="https://chosung-letter.notion.site/1dcc2f838fab47eeb47c97787077ab9f"
+            className={notice}
+          >
+            <div className={noticeContents}>
+              <MdNotificationsNone size={16} />
+              <span style={{ fontWeight: Theme.fontWeight.bold }}>공지</span>
+              <span>이제 정식 출시된 ㅊㅅㅍㅈ를 만나보아요!</span>
+            </div>
+            <MdOutlineEast size={16} />
+          </a>
           <div className={profile}>
             <Tag text="To." />
             <div className={profileImgContainer}>
