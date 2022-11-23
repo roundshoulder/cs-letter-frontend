@@ -5,6 +5,7 @@ import Tag from '../components/Tag';
 import { MdMailOutline } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import down from '../assets/down.svg';
+import { useState, useEffect, useRef } from 'react';
 
 const intro = css`
   display: flex;
@@ -56,6 +57,28 @@ const mypage = css`
 function Home() {
   const memberToken = localStorage.getItem('memberToken');
   const navigate = useNavigate();
+  const prevScrollY = useRef(0);
+  const [goingUp, setGoingUp] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (prevScrollY.current < currentScrollY && goingUp) {
+        setGoingUp(false);
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: 'smooth',
+        });
+      }
+      if (prevScrollY.current > currentScrollY && !goingUp) {
+        setGoingUp(true);
+      }
+      prevScrollY.current = currentScrollY;
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [goingUp]);
+
   const animation1 = css`
     animation-name: slide;
     animation-duration: 30s;
