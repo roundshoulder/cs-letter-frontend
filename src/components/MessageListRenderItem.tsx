@@ -40,24 +40,34 @@ function MessageListRenderItem({ message, isMe }: Params) {
       <div>{children}</div>
     );
   }
-  const [year, month, date, hour, minute, second] = time
-    .split('/')
-    .map(v => parseInt(v, 10));
-  const now = new Date();
-  const nowYear = now.getFullYear();
-  const nowMonth = now.getMonth() + 1;
-  const nowDate = now.getDate();
-  const nowHour = now.getHours();
-  const nowMinute = now.getMinutes();
-  const nowSecond = now.getSeconds();
-  console.log(year, month, date, hour, minute, second);
-  console.log(nowYear, nowMonth, nowDate, nowHour, nowMinute, nowSecond);
+
+  function calcTime(time: string) {
+    const start = new Date(time);
+    const end = new Date();
+    const diff = end.valueOf() - start.valueOf();
+    if (diff < 1000 * 60) {
+      return '방금 전';
+    } else if (diff < 1000 * 60 * 60) {
+      return `${Math.floor(diff / (1000 * 60))}분 전`;
+    } else if (diff < 24 * 1000 * 60 * 60) {
+      return `${Math.floor(diff / (1000 * 60 * 60))}시간 전`;
+    } else if (diff < 3 * 1000 * 60 * 60 * 24) {
+      return `${Math.floor(diff / (1000 * 60 * 60 * 24))}일 전`;
+    }
+    return `${start.getFullYear().toString().slice(2)}년 ${
+      start.getMonth() + 1
+    }월 ${start.getDate()}일`;
+  }
+
   return (
     <Container>
       <div className={box}>
         <div className={header}>
           <Tag color={color} text={nickname} />
           <div className={status}>
+            <div style={{ color: Theme.color.grey, marginLeft: '5px' }}>
+              {calcTime(time)} |
+            </div>
             <span>{isCorrect ? '완성' : isRead ? '푸는 중' : '읽지 않음'}</span>
             <MdVerified
               size={18}
@@ -69,7 +79,6 @@ function MessageListRenderItem({ message, isMe }: Params) {
                   : Theme.color.grey
               }
             />
-            <div style={{ color: Theme.color.grey, marginLeft: '5px' }}></div>
           </div>
         </div>
         <div style={{ position: 'relative' }}>
