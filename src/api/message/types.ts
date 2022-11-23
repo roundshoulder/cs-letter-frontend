@@ -16,6 +16,8 @@ export interface Message extends createMessageParams {
   time: string;
   isCorrect: boolean;
   isRead: boolean;
+  nextCursor: number;
+  prevCursor: number;
 }
 
 export interface getDetailMessageResult {

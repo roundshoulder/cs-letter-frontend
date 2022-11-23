@@ -101,6 +101,7 @@ const staticItem = css`
 function User() {
   const memberToken = useLocation().pathname.split('/')[2];
   const [user, setUser] = useState<getUserResult | null>(null);
+  const [page, setPage] = useState<number>(0);
   const [cursor, setCursor] = useState<number>(0);
   const [messages, setMessages] = useState<Message[] | null>(null);
   const [copy, setCopy] = useState<boolean>(false);
@@ -112,17 +113,13 @@ function User() {
     },
   });
 
-  useQuery(
-    ['getMessage', cursor, memberToken],
+  const { isLoading } = useQuery(
+    ['getMessage', memberToken, cursor],
     () =>
-      getMessage(
-        cursor !== 0 && !!messages
-          ? {
-              memberToken: memberToken,
-              cursor: messages[messages.length - 1].messageId,
-            }
-          : { memberToken, cursor }
-      ),
+      getMessage({
+        memberToken: memberToken,
+        cursor: cursor,
+      }),
     {
       onSuccess: data => {
         setMessages(data);
@@ -166,19 +163,21 @@ function User() {
             </div>
             <div className={arrowButtonContainer}>
               <PageNavButton
-                onClick={() => {
-                  setCursor(v => v - 1);
-                }}
                 direction="back"
-                enable={cursor !== 0}
+                enable={messages[0].prevCursor !== null && !isLoading}
+                onClick={() => {
+                  setCursor(messages[0].prevCursor);
+                  setPage(v => v - 1);
+                }}
               />
-              {cursor + 1}
+              {page + 1}
               <PageNavButton
                 onClick={() => {
-                  setCursor(v => v + 1);
+                  setCursor(messages[0].nextCursor);
+                  setPage(v => v + 1);
                 }}
                 direction="foward"
-                enable={!!messages[messages.length - 1]?.haveNextMessage}
+                enable={messages[0].nextCursor !== null && !isLoading}
               />
             </div>
           </div>
