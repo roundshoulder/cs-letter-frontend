@@ -86,11 +86,9 @@ function Header() {
                 </button>
               </>
             ) : (
-              <>
-                <a href={KAKAO_AUTH_URL} className={button}>
-                  로그인
-                </a>
-              </>
+              <a href={KAKAO_AUTH_URL} className={button}>
+                로그인
+              </a>
             )}
           </>
         )}
