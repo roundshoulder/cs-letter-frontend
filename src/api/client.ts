@@ -30,6 +30,13 @@ export const setupInterceptor = (navigate: NavigateFunction) => {
     },
     async error => {
       const exception = error.response?.data?.exception;
+      // Refresh Token not Valid(Other Browser Login)
+      if (
+        exception === 'com.project.csletter.member.exception.MemberException'
+      ) {
+        return;
+      }
+
       // No Element
       if (exception === 'java.util.NoSuchElementException') {
         navigate('/notfound');
@@ -55,13 +62,15 @@ export const setupInterceptor = (navigate: NavigateFunction) => {
           } else {
             // Access Token Expired
             refresh({ accessToken, refreshToken }).then(
-              // 에러처리 필요 refreshToken 만료
-              // com.project.csletter.member.exception.MemberException
               ({ accessToken, refreshToken }: RefreshParams) => {
                 applyToken(accessToken);
                 localStorage.setItem('accessToken', accessToken);
                 localStorage.setItem('refreshToken', refreshToken);
                 previousRequest.headers.Authorization = `Bearer ${accessToken}`;
+              },
+              // Refresh Token not Valid(Other Browser Login)
+              () => {
+                localStorage.clear();
               }
             );
           }
