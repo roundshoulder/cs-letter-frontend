@@ -90,10 +90,6 @@ function Header() {
                 <a href={KAKAO_AUTH_URL} className={button}>
                   로그인
                 </a>
-                |
-                <a href={KAKAO_AUTH_URL} className={button}>
-                  내 편지함
-                </a>
               </>
             )}
           </>
