@@ -150,7 +150,10 @@ function Home() {
         {memberToken ? (
           <button
             className={mypage}
-            onClick={() => navigate(`/u/${memberToken}`)}
+            onClick={() => {
+              console.log(memberToken);
+              navigate(`/u/${memberToken}`);
+            }}
           >
             내 편지함 가기
           </button>
