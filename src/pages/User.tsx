@@ -194,20 +194,20 @@ function User() {
             <div className={arrowButtonContainer}>
               <PageNavButton
                 direction="back"
-                enable={messages[0].prevCursor !== null && !isLoading}
+                enable={!!messages[0]?.prevCursor && !isLoading}
                 onClick={() => {
-                  setCursor(messages[0].prevCursor);
+                  setCursor(messages[0]?.prevCursor);
                   setPage(v => v - 1);
                 }}
               />
               {page + 1}
               <PageNavButton
+                direction="foward"
+                enable={!!messages[0]?.nextCursor && !isLoading}
                 onClick={() => {
-                  setCursor(messages[0].nextCursor);
+                  setCursor(messages[0]?.nextCursor);
                   setPage(v => v + 1);
                 }}
-                direction="foward"
-                enable={messages[0].nextCursor !== null && !isLoading}
               />
             </div>
           </div>
