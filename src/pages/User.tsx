@@ -194,7 +194,11 @@ function User() {
             <div className={arrowButtonContainer}>
               <PageNavButton
                 direction="back"
-                enable={!!messages[0]?.prevCursor && !isLoading}
+                enable={
+                  (messages[0]?.prevCursor === 0 ||
+                    !!messages[0]?.prevCursor) &&
+                  !isLoading
+                }
                 onClick={() => {
                   setCursor(messages[0]?.prevCursor);
                   setPage(v => v - 1);
