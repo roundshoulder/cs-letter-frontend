@@ -157,7 +157,7 @@ function User() {
               <MdNotificationsNone size={16} />
               <span style={{ fontWeight: Theme.fontWeight.bold }}>공지</span>
               <span>
-                {'인스타그램(@chosung_letter)에서 버그 및 피드백 제보받아요!'}
+                {'인스타그램(@chosung_letter)에서 버그 제보 받아...!'}
               </span>
             </div>
             <MdOutlineEast size={16} />
