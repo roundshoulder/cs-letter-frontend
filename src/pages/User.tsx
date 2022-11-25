@@ -156,7 +156,9 @@ function User() {
             <div className={noticeContents}>
               <MdNotificationsNone size={16} />
               <span style={{ fontWeight: Theme.fontWeight.bold }}>공지</span>
-              <span>이제 정식 출시된 ㅊㅅㅍㅈ를 만나보아요!</span>
+              <span>
+                {'인스타그램(@chosung_letter)에서 버그 및 피드백 제보받아요!'}
+              </span>
             </div>
             <MdOutlineEast size={16} />
           </a>
