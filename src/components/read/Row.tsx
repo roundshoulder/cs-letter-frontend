@@ -74,7 +74,7 @@ function Row({
       </div>
       {isEditable ? (
         <input
-          maxLength={problem.length}
+          // maxLength={problem.length}
           placeholder="초성 메세지를 맞춰보세요"
           onChange={onChange}
           value={solution}

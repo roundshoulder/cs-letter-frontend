@@ -98,7 +98,7 @@ function Read() {
                 }
                 onChange={e => {
                   const newAnswer = [...answer];
-                  newAnswer[i] = e.target.value.slice(0, v.length);
+                  newAnswer[i] = e.target.value;
                   setAnswer(newAnswer);
                 }}
                 setIsEditable={() => {
@@ -118,7 +118,15 @@ function Read() {
             enable={enable}
             isCorrect={data.markingResult.isCorrect && true}
             onClick={() => {
-              mutate({ body: answer, messageId: data.messageId });
+              const newAnswers = [...answer];
+              newAnswers.map(
+                (v, i) => (newAnswers[i] = v.slice(0, data.body[i].length))
+              );
+              setAnswer(newAnswers);
+              mutate({
+                body: newAnswers,
+                messageId: data.messageId,
+              });
             }}
           >
             {data.markingResult.isCorrect
