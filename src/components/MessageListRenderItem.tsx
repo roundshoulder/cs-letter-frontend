@@ -92,6 +92,7 @@ function MessageListRenderItem({ message, isMe }: Params) {
             }}
           />
           <span style={{ paddingLeft: '14px' }}>
+            {/* TODO : add ... by has next row */}
             {body.length < 20 ? body : `${body}...`}
           </span>
         </div>
