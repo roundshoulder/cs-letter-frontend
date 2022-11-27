@@ -13,6 +13,7 @@ export interface createMessageParams {
 export interface Message extends createMessageParams {
   messageId: number;
   haveNextMessage: boolean;
+  haveSecondLine: boolean;
   time: string;
   isCorrect: boolean;
   isRead: boolean;

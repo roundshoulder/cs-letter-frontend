@@ -32,7 +32,16 @@ interface Params {
 }
 
 function MessageListRenderItem({ message, isMe }: Params) {
-  const { body, color, messageId, nickname, time, isCorrect, isRead } = message;
+  const {
+    body,
+    color,
+    messageId,
+    nickname,
+    time,
+    isCorrect,
+    isRead,
+    haveSecondLine,
+  } = message;
   function Container({ children }: { children: ReactNode }) {
     return isMe ? (
       <Link to={`/read/${messageId}`}>{children}</Link>
@@ -93,7 +102,7 @@ function MessageListRenderItem({ message, isMe }: Params) {
           />
           <span style={{ paddingLeft: '14px' }}>
             {/* TODO : add ... by has next row */}
-            {body.length < 20 ? body : `${body}...`}
+            {haveSecondLine ? `${body}...` : body}
           </span>
         </div>
       </div>
