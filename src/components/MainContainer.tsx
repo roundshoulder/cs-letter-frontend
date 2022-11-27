@@ -4,6 +4,7 @@ import Header from './Header';
 import { useLocation } from 'react-router-dom';
 import { PADDING } from '../assets/Theme';
 import Footer from './Footer';
+import Adfit from './Adfit';
 
 function MainContainer({ children }: { children: ReactNode }) {
   const isHome = useLocation().pathname === '/';
@@ -28,6 +29,7 @@ function MainContainer({ children }: { children: ReactNode }) {
   return (
     <div className={mainContainer}>
       {!isHome && <Header />}
+      <Adfit />
       <div className={contentsContainer}>{children}</div>
       <Footer />
     </div>

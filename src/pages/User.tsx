@@ -21,7 +21,6 @@ import { getMessage } from '../api/message';
 import { Message } from '../api/message/types';
 import PageNavButton from '../components/PageNavButton';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import Ad from '../components/Ad';
 
 const notice = css`
   display: flex;
@@ -181,7 +180,6 @@ function User() {
               </Link>
             )}
           </div>
-          <Ad />
           <div className={nav}>
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <Tag text="From." />
