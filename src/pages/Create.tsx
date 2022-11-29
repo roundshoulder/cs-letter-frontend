@@ -132,7 +132,7 @@ function Create() {
         <div className={textAreaContainer}>
           <textarea
             className={textArea}
-            placeholder="ex. 안녕하세요 라운드숄더입니다 (이모티콘 제외)"
+            placeholder="ex. 안녕하세요 라운드숄더입니다"
             value={form.body}
             onChange={e => {
               const replacedText = ReplaceEmoji(e.target.value.slice(0, 100));
@@ -151,7 +151,7 @@ function Create() {
           <textarea
             className={textArea}
             disabled={true}
-            placeholder="ex. ㅇㄴㅎㅅㅇ ㄹㅇㄷㅅㄷㅇㄴㄷ (이모티콘 제외)"
+            placeholder="ex. ㅇㄴㅎㅅㅇ ㄹㅇㄷㅅㄷㅇㄴㄷ"
             value={initial}
           />
         </div>
