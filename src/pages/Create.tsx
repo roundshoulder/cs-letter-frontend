@@ -15,7 +15,7 @@ import { ReplaceEmoji } from '../components/Validation';
 const container = css`
   display: flex;
   flex-direction: column;
-  gap: 60px;
+  gap: 40px;
 `;
 const row = css`
   display: flex;
@@ -126,11 +126,13 @@ function Create() {
           <Tag text="To." />
           {name}
         </div>
-        <div className={subtitle}>전하고 싶은 메세지를 입력해주세요</div>
+        <div className={subtitle}>
+          {'메세지를 입력해주세요 (초성, 이모티콘 X)'}
+        </div>
         <div className={textAreaContainer}>
           <textarea
             className={textArea}
-            placeholder="안녕하세요 라운드숄더입니다 (이모티콘 제외)"
+            placeholder="ex. 안녕하세요 라운드숄더입니다 (이모티콘 제외)"
             value={form.body}
             onChange={e => {
               const replacedText = ReplaceEmoji(e.target.value.slice(0, 100));
@@ -149,7 +151,7 @@ function Create() {
           <textarea
             className={textArea}
             disabled={true}
-            placeholder="ㅇㄴㅎㅅㅇ ㄹㅇㄷㅅㄷㅇㄴㄷ (이모티콘 제외)"
+            placeholder="ex. ㅇㄴㅎㅅㅇ ㄹㅇㄷㅅㄷㅇㄴㄷ (이모티콘 제외)"
             value={initial}
           />
         </div>
