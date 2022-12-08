@@ -84,6 +84,9 @@ function EditProfile() {
   });
   useQuery(['getUser', memberToken], () => getUser(memberToken), {
     onSuccess: (data: getUserResult) => {
+      if (!data.isMe) {
+        navigate(`/nopermission`);
+      }
       setUser(data);
       setForm({
         ...form,
