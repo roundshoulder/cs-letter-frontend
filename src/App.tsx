@@ -9,6 +9,7 @@ import User from './pages/User';
 import useAuthLoadEffect from './hooks/useAuthLoadEffect';
 import Alert from './pages/Alert';
 import { setupInterceptor } from './api/client';
+import EditProfile from './pages/EditProfile';
 
 function App() {
   const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/u/:user" element={<User />} />
+          <Route path="/edit/:user" element={<EditProfile />} />
           <Route path="/create/:user" element={<Create />} />
           <Route path="/read/:no" element={<Read />} />
           <Route path="/oauth/callback/*" element={<KakaoRedirectHandler />} />

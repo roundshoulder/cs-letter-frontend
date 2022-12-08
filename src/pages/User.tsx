@@ -10,6 +10,7 @@ import {
   MdMailOutline,
   MdNotificationsNone,
   MdOutlineEast,
+  MdPersonOutline,
 } from 'react-icons/md';
 import { useState } from 'react';
 import BottomButton from '../components/BottomButton';
@@ -170,7 +171,15 @@ function User() {
               />
             </div>
             {user.kakaoNickname}
-            {!user.isMe && (
+            {user.isMe ? (
+              <Link
+                to={`/edit/${memberToken}`}
+                className={`${createButton} ${Theme.tagStyle[11]}`}
+              >
+                <MdPersonOutline />
+                프로필 수정
+              </Link>
+            ) : (
               <Link
                 to={`/create/${memberToken}`}
                 className={`${createButton} ${Theme.tagStyle[11]}`}
