@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { getUserResult } from '../api/user/type';
 import { useMutation, useQuery } from 'react-query';
 import { getUser, updateProfile } from '../api/user';
@@ -74,6 +74,7 @@ interface Form {
 }
 
 function EditProfile() {
+  const navigate = useNavigate();
   const memberToken = useLocation().pathname.split('/')[2];
   const [user, setUser] = useState<getUserResult | null>(null);
   const [form, setForm] = useState<Form>({
@@ -92,11 +93,11 @@ function EditProfile() {
   });
 
   const { mutate } = useMutation(updateProfile, {
-    onSuccess: async data => {
-      console.log(data);
+    onSuccess: async () => {
+      navigate(`/u/${memberToken}`);
     },
-    onError: e => {
-      console.log(e);
+    onError: () => {
+      alert('프로필 수정에 실패했습니다. 잠시 후 다시 시도해주세요.');
     },
   });
 
@@ -141,7 +142,7 @@ function EditProfile() {
           multiple
           style={{ display: 'none' }}
           onChange={e => {
-            if (e.target.files) {
+            if (e.target.files && e.target.files.length !== 0) {
               const file = e.target.files[0];
               const reader = new FileReader();
               reader.readAsDataURL(file);
@@ -171,7 +172,12 @@ function EditProfile() {
           spellCheck={false}
         />
       </div>
-      <BottomButton onClick={() => onSubmit()}>수정하기</BottomButton>
+      <BottomButton
+        enable={user?.kakaoNickname !== form.nickname || !!form.profileImage}
+        onClick={() => onSubmit()}
+      >
+        수정하기
+      </BottomButton>
     </div>
   );
 }

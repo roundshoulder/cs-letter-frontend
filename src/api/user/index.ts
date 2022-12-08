@@ -12,8 +12,6 @@ export async function getUserName(memberToken: string) {
 }
 
 export async function updateProfile(formData: FormData) {
-  const response = await client.patch('/member', formData, {
-    headers: { 'content-type': 'multipart/form-data' },
-  });
+  const response = await client.post('/member', formData);
   return response;
 }
