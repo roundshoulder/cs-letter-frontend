@@ -38,6 +38,14 @@ const profileImgContainer = css`
   margin-top: 20px;
 `;
 
+const profileImg = css`
+  width: 100%;
+  height: 100%;
+  object-fit: 'cover';
+  display: flex;
+  background-color: ${Theme.color.black};
+`;
+
 const imageIconContainer = css`
   display: flex;
   justify-content: center;
@@ -138,7 +146,7 @@ function EditProfile() {
                 form.preview ? (form.preview as string) : user?.kakaoProfileImg
               }
               alt="profile"
-              style={{ width: '100%', height: `100%`, objectFit: 'cover' }}
+              className={profileImg}
             />
           </div>
           <div className={imageIconContainer}>
