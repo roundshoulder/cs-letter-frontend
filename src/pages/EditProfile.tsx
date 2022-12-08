@@ -8,6 +8,7 @@ import Theme from '../assets/Theme';
 import Tag from '../components/Tag';
 import BottomButton from '../components/BottomButton';
 import { MdImage } from 'react-icons/md';
+import imageCompression from 'browser-image-compression';
 
 const title = css`
   width: 100%;
@@ -108,10 +109,15 @@ function EditProfile() {
     const formData = new FormData();
     formData.append('memberUpdate', form.nickname);
     if (form.profileImage) {
-      formData.append('multipartFile', form.profileImage);
+      formData.append(
+        'multipartFile',
+        form.profileImage,
+        `${memberToken}.jpeg`
+      );
     }
+    formData.forEach(d => console.log(d));
     mutate(formData);
-  }, [mutate, form]);
+  }, [mutate, form, memberToken]);
 
   return (
     <div
@@ -145,18 +151,23 @@ function EditProfile() {
           accept="image/jpg, image/jpeg, image/png"
           multiple={false}
           style={{ display: 'none' }}
-          onChange={e => {
+          onChange={async e => {
             if (e.target.files && e.target.files.length !== 0) {
               const file = e.target.files[0];
-              setForm({ ...form, profileImage: file });
-              const reader = new FileReader();
-              reader.readAsDataURL(file);
-              reader.onloadend = () => {
-                setForm({
-                  ...form,
-                  preview: reader.result,
-                });
+              const options = {
+                maxSizeMB: 1,
+                maxWidthOrHeight: 270,
+                fileType: 'image/jpeg',
               };
+              const compressedFile = await imageCompression(file, options);
+              const compressedURL = await imageCompression.getDataUrlFromFile(
+                compressedFile
+              );
+              setForm({
+                ...form,
+                profileImage: compressedFile,
+                preview: compressedURL,
+              });
             }
           }}
           id="profileImg"
