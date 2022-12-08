@@ -115,7 +115,6 @@ function EditProfile() {
         `${memberToken}.jpeg`
       );
     }
-    formData.forEach(d => console.log(d));
     mutate(formData);
   }, [mutate, form, memberToken]);
 
