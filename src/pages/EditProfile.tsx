@@ -148,12 +148,12 @@ function EditProfile() {
           onChange={e => {
             if (e.target.files && e.target.files.length !== 0) {
               const file = e.target.files[0];
+              setForm({ ...form, profileImage: file });
               const reader = new FileReader();
               reader.readAsDataURL(file);
               reader.onloadend = () => {
                 setForm({
                   ...form,
-                  profileImage: file,
                   preview: reader.result,
                 });
               };
