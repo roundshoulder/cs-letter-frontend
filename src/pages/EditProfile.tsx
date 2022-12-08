@@ -120,6 +120,7 @@ function EditProfile() {
         flexGrow: 1,
         flexDirection: 'column',
         justifyContent: 'space-between',
+        gap: '70px',
         paddingBottom: '30px',
       }}
     >
@@ -142,7 +143,7 @@ function EditProfile() {
         <input
           type="file"
           accept="image/jpg, image/jpeg, image/png"
-          multiple
+          multiple={false}
           style={{ display: 'none' }}
           onChange={e => {
             if (e.target.files && e.target.files.length !== 0) {
