@@ -1,4 +1,4 @@
-# 초성 편지 Client
+![Frame 236](https://user-images.githubusercontent.com/66757141/213925565-04ebcbca-3966-4fbb-a65e-10bbd3d7bbd7.png)
 
 ## ✉️ ㅊㅅㅍㅈ?
 
