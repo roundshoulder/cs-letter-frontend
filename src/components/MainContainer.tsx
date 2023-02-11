@@ -5,15 +5,16 @@ import { useLocation } from 'react-router-dom';
 import { PADDING } from '../assets/Theme';
 import Footer from './Footer';
 import Adfit from './Adfit';
+import LeftTitle from './LeftTitle';
 
 function MainContainer({ children }: { children: ReactNode }) {
   const isHome = useLocation().pathname === '/';
-  const contentsContainer = css`
+  const outerContainer = css`
+    width: 100%;
+    min-height: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: ${isHome ? 'center' : undefined};
-    padding: ${isHome ? 0 : PADDING}px;
-    flex-grow: 1;
+    justify-content: center;
+    background-color: ${isHome ? '#0a0a0a' : undefined};
   `;
   const mainContainer = css`
     width: 100%;
@@ -24,14 +25,23 @@ function MainContainer({ children }: { children: ReactNode }) {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    background-color: ${isHome ? '#0a0a0a' : undefined};
+  `;
+  const contentsContainer = css`
+    display: flex;
+    flex-direction: column;
+    justify-content: ${isHome ? 'center' : undefined};
+    padding: ${isHome ? 0 : PADDING}px;
+    flex-grow: 1;
   `;
   return (
-    <div className={mainContainer}>
-      {!isHome && <Header />}
-      <Adfit />
-      <div className={contentsContainer}>{children}</div>
-      <Footer />
+    <div className={outerContainer}>
+      <LeftTitle />
+      <div className={mainContainer}>
+        {!isHome && <Header />}
+        <Adfit />
+        <div className={contentsContainer}>{children}</div>
+        <Footer />
+      </div>
     </div>
   );
 }
