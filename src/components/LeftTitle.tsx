@@ -11,7 +11,6 @@ function LeftTitle() {
       display: flex;
       width: 30%;
       color: ${isHome ? '#fafafa' : '#0a0a0a'};
-      /* border: solid 2px red; */
     }
   `;
   const fix = css`
@@ -25,6 +24,9 @@ function LeftTitle() {
     align-items: center;
     text-align: center;
   `;
+  const subtext = css`
+    color: ${isHome ? 'rgba(250, 250, 250, 0.6)' : 'rgba(10, 10, 10, 0.6)'};
+  `;
   return (
     <div className={LeftDiv}>
       <div className={fix}>
@@ -32,7 +34,7 @@ function LeftTitle() {
         <span>
           초성편지를 보내보세요!
           <br />
-          <span style={{ color: 'rgba(250, 250, 250, 0.6)' }}>
+          <span className={subtext}>
             본 사이트는 모바일 웹에 최적화되어있습니다.
           </span>
         </span>
